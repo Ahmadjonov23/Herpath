@@ -1,4 +1,4 @@
-export type TabType = 'home' | 'jobs' | 'map' | 'applications' | 'profile' | 'saved' | 'chat' | 'notifications' | 'safety' | 'university' | 'employer' | 'admin';
+export type TabType = 'home' | 'jobs' | 'map' | 'applications' | 'profile' | 'saved' | 'chat' | 'notifications' | 'safety' | 'university' | 'employer' | 'admin' | 'pitch';
 
 export type JobType = 'part-time' | 'remote' | 'flexible' | 'internship' | 'full-time';
 

@@ -34,7 +34,8 @@ export const Navbar: React.FC<NavbarProps> = ({
     { id: 'map', label: 'Xavfsiz xarita' },
     { id: 'applications', label: 'Arizalar' },
     { id: 'university', label: 'Hamkorlar' },
-    { id: 'safety', label: 'Xavfsizlik' }
+    { id: 'safety', label: 'Xavfsizlik' },
+    { id: 'pitch', label: 'Taqdimot' }
   ];
 
   return (
@@ -82,6 +83,21 @@ export const Navbar: React.FC<NavbarProps> = ({
 
         {/* Action Controls */}
         <div className="flex items-center gap-2">
+          {/* Pitch Deck Presentation Action Button */}
+          <button
+            onClick={() => onSelectTab('pitch')}
+            className={`h-8.5 px-2.5 sm:px-3 rounded-lg border text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer ${
+              currentTab === 'pitch'
+                ? 'bg-[#0F766E] text-white border-[#0F766E]'
+                : 'bg-teal-50/80 border-teal-200 text-[#0F766E] hover:bg-teal-100'
+            }`}
+            title="HerPath Loyiha Taqdimoti (Pitch Deck)"
+          >
+            <span className="w-2 h-2 rounded-full bg-[#0D9488]" />
+            <span className="hidden sm:inline">Pitch Deck</span>
+            <span className="sm:hidden text-[11px]">Taqdimot</span>
+          </button>
+
           {/* Functional SOS Emergency Trigger (Tasteful, serious, non-decorative) */}
           <button
             onClick={onOpenSos}

@@ -23,6 +23,7 @@ import { NotificationsView } from './components/NotificationsView';
 import { UniversityPartnersView } from './components/UniversityPartnersView';
 import { EmployerDashboardView } from './components/EmployerDashboardView';
 import { AdminVerificationView } from './components/AdminVerificationView';
+import { PitchDeckView } from './components/PitchDeckView';
 import { OnboardingModal } from './components/OnboardingModal';
 import { AuthModal } from './components/AuthModal';
 import { CheckCircle2 } from 'lucide-react';
@@ -159,6 +160,7 @@ export default function App() {
             onNavigateToMap={() => setCurrentTab('map')}
             onNavigateToJobs={handleNavigateToJobsWithFilter}
             onNavigateToCompanions={() => setCurrentTab('map')}
+            onNavigateToPitch={() => setCurrentTab('pitch')}
           />
         );
       case 'jobs':
@@ -224,6 +226,14 @@ export default function App() {
         );
       case 'admin':
         return <AdminVerificationView />;
+      case 'pitch':
+        return (
+          <PitchDeckView
+            onBackToApp={() => setCurrentTab('home')}
+            onNavigateToMap={() => setCurrentTab('map')}
+            onNavigateToJobs={() => setCurrentTab('jobs')}
+          />
+        );
       case 'profile':
       default:
         return (
@@ -236,6 +246,17 @@ export default function App() {
         );
     }
   };
+
+  // Full-immersion executive mode for Pitch Deck
+  if (currentTab === 'pitch') {
+    return (
+      <PitchDeckView
+        onBackToApp={() => setCurrentTab('home')}
+        onNavigateToMap={() => setCurrentTab('map')}
+        onNavigateToJobs={() => setCurrentTab('jobs')}
+      />
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#FAF8F5] text-[#1E1B18] flex flex-col font-sans selection:bg-[#802244] selection:text-white antialiased">

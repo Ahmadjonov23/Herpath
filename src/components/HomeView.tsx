@@ -4,7 +4,8 @@ import { JobCard } from './JobCard';
 import {
   Search, ShieldCheck, MapPin, ArrowRight,
   ChevronRight, Users, Map, Clock, Navigation,
-  Sunrise, Sun, Moon, GraduationCap, Laptop, Sparkles
+  Sunrise, Sun, Moon, GraduationCap, Laptop, Sparkles,
+  Presentation
 } from 'lucide-react';
 
 interface HomeViewProps {
@@ -17,6 +18,7 @@ interface HomeViewProps {
   onNavigateToMap: () => void;
   onNavigateToJobs: (filterPreset?: string) => void;
   onNavigateToCompanions: () => void;
+  onNavigateToPitch?: () => void;
 }
 
 export const HomeView: React.FC<HomeViewProps> = ({
@@ -28,7 +30,8 @@ export const HomeView: React.FC<HomeViewProps> = ({
   onVerifyClick,
   onNavigateToMap,
   onNavigateToJobs,
-  onNavigateToCompanions
+  onNavigateToCompanions,
+  onNavigateToPitch
 }) => {
   const greeting = useMemo(() => {
     const hour = new Date().getHours();
@@ -132,6 +135,37 @@ export const HomeView: React.FC<HomeViewProps> = ({
             </button>
           </div>
         </div>
+      </section>
+
+      {/* Executive Pitch Deck Invitation Banner */}
+      <section
+        onClick={onNavigateToPitch}
+        className="bg-gradient-to-r from-[#0A192F] via-[#0D3B4C] to-[#0F766E] rounded-xl p-4 sm:p-5 text-white flex flex-col sm:flex-row sm:items-center justify-between gap-4 cursor-pointer hover:shadow-md transition-shadow group shadow-xs border border-[#1E293B]"
+      >
+        <div className="flex items-center gap-3.5">
+          <div className="w-10 h-10 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center shrink-0">
+            <Presentation className="w-5 h-5 text-teal-300" />
+          </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-teal-300 bg-white/10 px-2 py-0.5 rounded">
+                Yangi · 2026 Nashri
+              </span>
+              <span className="text-xs text-stone-300 font-medium">Investorlar & Hamkorlar uchun</span>
+            </div>
+            <h3 className="text-sm sm:text-base font-bold text-white mt-1">
+              HerPath Loyiha Taqdimoti (Pitch Deck) bilan tanishing
+            </h3>
+            <p className="text-xs text-stone-300 mt-0.5">
+              8 ta interaktiv slayd, 3D me’moriy infografikalar va O‘zbekiston talabalar bozorining tizimli tahlili.
+            </p>
+          </div>
+        </div>
+
+        <button className="h-8.5 px-3.5 rounded-lg bg-white text-[#0A192F] text-xs font-bold flex items-center gap-1.5 self-start sm:self-auto shrink-0 group-hover:bg-teal-50 transition-colors shadow-xs">
+          <span>Taqdimotni ochish</span>
+          <ArrowRight className="w-3.5 h-3.5 text-[#0F766E]" />
+        </button>
       </section>
 
       {/* Two Column Grid: Safe Route Hub + Contextual Safety Status */}
