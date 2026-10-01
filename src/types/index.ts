@@ -1,4 +1,89 @@
-export type TabType = 'home' | 'jobs' | 'map' | 'applications' | 'profile' | 'saved' | 'chat' | 'notifications' | 'safety' | 'university' | 'employer' | 'admin' | 'pitch';
+export type TabType = 'home' | 'jobs' | 'map' | 'applications' | 'profile' | 'saved' | 'chat' | 'notifications' | 'university' | 'employer' | 'admin';
+
+export type UserRole = 'job_seeker' | 'employer' | 'admin';
+
+export interface JobSeekerProfile {
+  fullName: string;
+  phone: string;
+  email: string;
+  birthDate?: string;
+  gender?: string;
+  university: string;
+  faculty: string;
+  courseYear: string;
+  studyType?: string;
+  district: string;
+  desiredPosition?: string;
+  expectedSalary?: string;
+  preferredHours: string;
+  freeHours?: string;
+  // Ish izlovchi o'zi ishlashni hohlagan kunlari, kun vaqti va soatlari
+  preferredDays?: string[];
+  workingTimeOfDay?: string;
+  workingHoursStart?: string;
+  workingHoursEnd?: string;
+  languages?: string[];
+  skills: string[];
+  interests: string[];
+  experience?: string;
+  bio?: string;
+  safetyPreferences?: {
+    cctvRequired: boolean;
+    transportRequired: boolean;
+    femaleStaffOnly: boolean;
+  };
+  certificates?: {
+    id: string;
+    title: string;
+    issuer: string;
+    date: string;
+    fileName?: string;
+  }[];
+  recommendations?: {
+    id: string;
+    recommenderName: string;
+    organization: string;
+    role: string;
+    phone?: string;
+    text?: string;
+    fileName?: string;
+  }[];
+}
+
+export interface EmployerProfile {
+  companyName: string;
+  inn: string;
+  legalType?: string;
+  category: string;
+  address: string;
+  landmark?: string;
+  contactPerson: string;
+  contactRole?: string;
+  phone: string;
+  email: string;
+  website?: string;
+  employeeCount?: string;
+  description?: string;
+  eveningTransportSupported: boolean;
+  cctvEquipped: boolean;
+  formalContractGuaranteed?: boolean;
+  femaleStaffRatio?: string;
+  verifiedSince: string;
+  isVerified: boolean;
+  permitFile?: {
+    name: string;
+    size: string;
+    uploadDate: string;
+    type?: string;
+  };
+}
+
+export interface AdminProfile {
+  fullName: string;
+  email: string;
+  role: string;
+  lastLogin: string;
+}
 
 export type JobType = 'part-time' | 'remote' | 'flexible' | 'internship' | 'full-time';
 
@@ -12,6 +97,11 @@ export interface Job {
   salaryMax: number;
   salaryPeriod: string;
   schedule: string;
+  // Ish beruvchi e'londa belgilagan ish kunlari, kun vaqti va soatlari
+  workingDays?: string[];
+  workingTimeOfDay?: string;
+  workingHoursStart?: string;
+  workingHoursEnd?: string;
   distanceKm: number;
   location: string;
   district: string;

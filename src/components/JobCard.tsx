@@ -92,8 +92,12 @@ export const JobCard: React.FC<JobCardProps> = ({
         {/* Meta row: Time, District, Distance */}
         <div className="flex flex-wrap items-center gap-y-1 gap-x-2.5 text-xs text-stone-600 mb-3 pt-2.5 border-t border-stone-100">
           <div className="flex items-center gap-1">
-            <Clock className="w-3.5 h-3.5 text-stone-400 shrink-0" />
-            <span>{job.schedule}</span>
+            <Clock className="w-3.5 h-3.5 text-[#802244] shrink-0" />
+            <span className="font-medium text-stone-800">
+              {job.workingDays && job.workingDays.length > 0 && job.workingHoursStart
+                ? `${job.workingDays.length === 5 && job.workingDays.includes('Dushanba') && job.workingDays.includes('Juma') && !job.workingDays.includes('Shanba') ? 'Dush–Jum' : job.workingDays.join(', ')} (${job.workingHoursStart} – ${job.workingHoursEnd})`
+                : job.schedule}
+            </span>
           </div>
 
           <span aria-hidden="true" className="text-stone-300">·</span>

@@ -2,10 +2,9 @@ import React, { useMemo } from 'react';
 import { Job } from '../types';
 import { JobCard } from './JobCard';
 import {
-  Search, ShieldCheck, MapPin, ArrowRight,
+  Search, ShieldCheck, MapPin,
   ChevronRight, Users, Map, Clock, Navigation,
-  Sunrise, Sun, Moon, GraduationCap, Laptop, Sparkles,
-  Presentation
+  Sunrise, Sun, Moon, GraduationCap, Laptop, Sparkles, Briefcase
 } from 'lucide-react';
 
 interface HomeViewProps {
@@ -18,7 +17,6 @@ interface HomeViewProps {
   onNavigateToMap: () => void;
   onNavigateToJobs: (filterPreset?: string) => void;
   onNavigateToCompanions: () => void;
-  onNavigateToPitch?: () => void;
 }
 
 export const HomeView: React.FC<HomeViewProps> = ({
@@ -30,8 +28,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
   onVerifyClick,
   onNavigateToMap,
   onNavigateToJobs,
-  onNavigateToCompanions,
-  onNavigateToPitch
+  onNavigateToCompanions
 }) => {
   const greeting = useMemo(() => {
     const hour = new Date().getHours();
@@ -78,7 +75,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
             </h1>
           </div>
           <p className="text-sm text-stone-600 mt-1 mb-4">
-            Bugun siz uchun <span className="font-semibold text-stone-900">24 ta mos imkoniyat</span> topildi.
+            Bugun siz uchun <span className="font-semibold text-stone-900">{recommendedJobs.length > 0 ? `${recommendedJobs.length} ta mos imkoniyat` : 'yangi xavfsiz imkoniyatlar tez orada'}</span> mavjud.
           </p>
 
           {/* Search Trigger Input Bar */}
@@ -135,37 +132,6 @@ export const HomeView: React.FC<HomeViewProps> = ({
             </button>
           </div>
         </div>
-      </section>
-
-      {/* Executive Pitch Deck Invitation Banner */}
-      <section
-        onClick={onNavigateToPitch}
-        className="bg-gradient-to-r from-[#0A192F] via-[#0D3B4C] to-[#0F766E] rounded-xl p-4 sm:p-5 text-white flex flex-col sm:flex-row sm:items-center justify-between gap-4 cursor-pointer hover:shadow-md transition-shadow group shadow-xs border border-[#1E293B]"
-      >
-        <div className="flex items-center gap-3.5">
-          <div className="w-10 h-10 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center shrink-0">
-            <Presentation className="w-5 h-5 text-teal-300" />
-          </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-teal-300 bg-white/10 px-2 py-0.5 rounded">
-                Yangi · 2026 Nashri
-              </span>
-              <span className="text-xs text-stone-300 font-medium">Investorlar & Hamkorlar uchun</span>
-            </div>
-            <h3 className="text-sm sm:text-base font-bold text-white mt-1">
-              HerPath Loyiha Taqdimoti (Pitch Deck) bilan tanishing
-            </h3>
-            <p className="text-xs text-stone-300 mt-0.5">
-              8 ta interaktiv slayd, 3D me’moriy infografikalar va O‘zbekiston talabalar bozorining tizimli tahlili.
-            </p>
-          </div>
-        </div>
-
-        <button className="h-8.5 px-3.5 rounded-lg bg-white text-[#0A192F] text-xs font-bold flex items-center gap-1.5 self-start sm:self-auto shrink-0 group-hover:bg-teal-50 transition-colors shadow-xs">
-          <span>Taqdimotni ochish</span>
-          <ArrowRight className="w-3.5 h-3.5 text-[#0F766E]" />
-        </button>
       </section>
 
       {/* Two Column Grid: Safe Route Hub + Contextual Safety Status */}
@@ -291,18 +257,28 @@ export const HomeView: React.FC<HomeViewProps> = ({
         </div>
 
         {/* Job Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {recommendedJobs.slice(0, 6).map((job) => (
-            <JobCard
-              key={job.id}
-              job={job}
-              isSaved={savedJobIds.has(job.id)}
-              onSelect={onSelectJob}
-              onSaveToggle={onSaveToggle}
-              onVerifyClick={onVerifyClick}
-            />
-          ))}
-        </div>
+        {recommendedJobs.length === 0 ? (
+          <div className="bg-white rounded-xl border border-stone-200 p-8 text-center space-y-2">
+            <Briefcase className="w-8 h-8 text-stone-300 mx-auto" />
+            <h4 className="text-sm font-bold text-stone-800">Hozircha faol ish e’lonlari mavjud emas</h4>
+            <p className="text-xs text-stone-500 max-w-md mx-auto">
+              Ish beruvchilar xavfsizlik auditidan o‘tgandan so‘ng yangi kafolatlangan vakansiyalar shu yerda ko‘rinadi.
+            </p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {recommendedJobs.slice(0, 6).map((job) => (
+              <JobCard
+                key={job.id}
+                job={job}
+                isSaved={savedJobIds.has(job.id)}
+                onSelect={onSelectJob}
+                onSaveToggle={onSaveToggle}
+                onVerifyClick={onVerifyClick}
+              />
+            ))}
+          </div>
+        )}
       </section>
     </div>
   );

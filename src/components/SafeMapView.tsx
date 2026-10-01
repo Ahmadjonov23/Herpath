@@ -21,7 +21,6 @@ import {
 interface SafeMapViewProps {
   selectedJob?: Job | null;
   onNavigateToCompanions: () => void;
-  onTriggerSos: () => void;
 }
 
 // Fixed Real Coordinates for Kokand University Toshkent filiali (Lutfiy ko'chasi)
@@ -852,8 +851,7 @@ const GoogleMapsTrafficRouteRenderer: React.FC<GoogleMapsTrafficRouteProps> = ({
 
 export const SafeMapView: React.FC<SafeMapViewProps> = ({
   selectedJob,
-  onNavigateToCompanions,
-  onTriggerSos
+  onNavigateToCompanions
 }) => {
   const [activeLayer, setActiveLayer] = useState<'all' | 'lighting' | 'crowded' | 'safePoints' | 'companions'>('all');
   const [mapEngine, setMapEngine] = useState<'google' | 'iframe' | 'vector'>('google');
@@ -1561,14 +1559,6 @@ export const SafeMapView: React.FC<SafeMapViewProps> = ({
                   <span>{simProgress > 0 && simProgress < 98 ? 'Davom ettirish' : 'Yo‘lni sinash'}</span>
                 </>
               )}
-            </button>
-
-            <button
-              onClick={onTriggerSos}
-              className="h-9 px-3.5 rounded-lg bg-[#DC2626] hover:bg-[#B91C1C] text-white shadow-xs text-xs font-bold flex items-center gap-1.5 cursor-pointer"
-            >
-              <AlertTriangle className="w-3.5 h-3.5" />
-              <span>SOS</span>
             </button>
           </div>
         </div>

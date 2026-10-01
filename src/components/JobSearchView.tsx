@@ -237,17 +237,21 @@ export const JobSearchView: React.FC<JobSearchViewProps> = ({
         <div className="bg-white rounded-xl border border-stone-200 p-12 text-center space-y-3">
           <Briefcase className="w-10 h-10 text-stone-300 mx-auto" />
           <h3 className="text-sm font-bold text-stone-800">
-            Hech qanday vakansiya topilmadi
+            {jobs.length === 0 ? 'Hozircha faol ish e’lonlari mavjud emas' : 'Hech qanday vakansiya topilmadi'}
           </h3>
           <p className="text-xs text-stone-500 max-w-sm mx-auto">
-            Qidiruv so‘zini o‘zgartiring yoki filtrlarni tozalab qaytadan urinib ko‘ring.
+            {jobs.length === 0
+              ? 'Platformada demo e’lonlar tozalangan. Ish beruvchilar auditdan o‘tgandan so‘ng yangi xavfsiz vakansiyalar e’lon qilinadi.'
+              : 'Qidiruv so‘zini o‘zgartiring yoki filtrlarni tozalab qaytadan urinib ko‘ring.'}
           </p>
-          <button
-            onClick={handleResetFilters}
-            className="mt-2 h-9 px-4 rounded-lg bg-stone-900 text-white text-xs font-semibold hover:bg-stone-800 transition-colors cursor-pointer"
-          >
-            Filtrlarni bekor qilish
-          </button>
+          {hasActiveFilters && (
+            <button
+              onClick={handleResetFilters}
+              className="mt-2 h-9 px-4 rounded-lg bg-stone-900 text-white text-xs font-semibold hover:bg-stone-800 transition-colors cursor-pointer"
+            >
+              Filtrlarni bekor qilish
+            </button>
+          )}
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

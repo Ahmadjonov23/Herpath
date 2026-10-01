@@ -121,6 +121,38 @@ export const JobDetailsModal: React.FC<JobDetailsModalProps> = ({
                 <span className="font-semibold text-stone-800">{job.noExperienceRequired ? 'Tajribasiz ham' : 'Boshlang‘ich'}</span>
               </div>
             </div>
+
+            {/* Ish beruvchi belgilagan ish kunlari va soatlari */}
+            <div className="p-3.5 bg-emerald-50/60 rounded-xl border border-emerald-200 text-xs text-stone-800 space-y-2 mt-3">
+              <div className="flex items-center gap-1.5 font-bold text-emerald-950 uppercase tracking-wider text-[11px]">
+                <Clock className="w-3.5 h-3.5 text-emerald-700" />
+                <span>Ish beruvchi belgilagan ish kunlari va soatlari</span>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                <div className="p-2.5 bg-white rounded-lg border border-emerald-100">
+                  <span className="text-stone-500 text-[10.5px] block font-medium">Ish kunlari:</span>
+                  <strong className="text-stone-900 block mt-0.5">
+                    {job.workingDays && job.workingDays.length > 0
+                      ? (job.workingDays.length === 5 && job.workingDays.includes('Dushanba') && job.workingDays.includes('Juma') && !job.workingDays.includes('Shanba')
+                        ? 'Dushanba – Juma'
+                        : job.workingDays.join(', '))
+                      : 'Dushanba – Juma'}
+                  </strong>
+                </div>
+                <div className="p-2.5 bg-white rounded-lg border border-emerald-100">
+                  <span className="text-stone-500 text-[10.5px] block font-medium">Kun vaqti (Smena):</span>
+                  <strong className="text-emerald-900 block mt-0.5">
+                    {job.workingTimeOfDay || 'Tushdan so‘ng (Part-time)'}
+                  </strong>
+                </div>
+                <div className="p-2.5 bg-white rounded-lg border border-emerald-100">
+                  <span className="text-stone-500 text-[10.5px] block font-medium">Ish soatlari:</span>
+                  <strong className="text-emerald-800 font-mono block mt-0.5">
+                    {job.workingHoursStart || '14:30'} – {job.workingHoursEnd || '18:30'}
+                  </strong>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Map Location Banner */}

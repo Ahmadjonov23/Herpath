@@ -2,472 +2,411 @@ import { Job, Application, Companion, SafePoint, EmergencyContact, Conversation,
 
 export const INITIAL_JOBS: Job[] = [
   {
-    id: 'job-1',
-    title: 'English Tutor & Speaking Club Mentor',
-    company: 'Bright Academy',
-    companyLogoText: 'BA',
+    id: 'kokand-job-1',
+    title: 'Ingliz tili Speaking Mentori (Part-time)',
+    company: 'Kokand Bright Academy',
+    companyLogoText: 'KBA',
     companyCategory: 'O‘quv markazi',
-    salaryMin: 3000000,
-    salaryMax: 4500000,
+    salaryMin: 3500000,
+    salaryMax: 5500000,
     salaryPeriod: 'oyiga',
-    schedule: '16:00 – 19:00',
-    distanceKm: 0.8,
-    location: 'Chilonzor tumani, Bunyodkor shox ko‘chasi 14',
-    district: 'Chilonzor',
+    schedule: '15:00 – 18:30 (Darsdan so‘ng)',
+    workingDays: ['Dushanba', 'Seshanba', 'Chorshanba', 'Payshanba', 'Juma'],
+    workingTimeOfDay: 'Tushdan so‘ng (Part-time)',
+    workingHoursStart: '15:00',
+    workingHoursEnd: '18:30',
+    distanceKm: 0.4,
+    location: 'Qo‘qon shahri, Turkiston ko‘chasi 24 (Kokand University yonida)',
+    district: 'Qo‘qon shahri',
     isVerified: true,
     verificationLevel: 'high',
-    safetyRating: 4.9,
-    reviewCount: 38,
+    safetyRating: 5.0,
+    reviewCount: 14,
     jobType: 'part-time',
     forStudents: true,
     noExperienceRequired: true,
-    postedDate: '2 kun oldin',
-    description: 'Bright Academy o‘quv markazimizga talaba qizlar va yosh pedagoglar uchun qulay vaqtda dars berish imkoniyati. Universitet darslaridan so‘ng 16:00 dan boshlanuvchi guruhlarga speaking club va grammatika mashg‘ulotlarini olib borish.',
+    postedDate: 'Bugun',
+    description: 'Kokand University talabalari uchun darsdan keyin yoshlarga ingliz tili speaking mashg‘ulotlarini o‘tish. Yorug‘, shinam va videokuzatuvli xonalar.',
     responsibilities: [
-      'Haftada 3 kun (Dushanba-Chorshanba-Juma) 16:00–19:00 oralig‘ida kichik guruhlarga dars o‘tish',
-      'O‘quvchilar bilan erkin muloqot va listening mashg‘ulotlarini tashkil etish',
-      'Oylik o‘zlashtirish hisobotlarini metodistga topshirish'
+      'Guruhlarda speaking va munozara darslarini olib borish',
+      'Talabalarning o‘zlashtirishini nazorat qilish va metodist bilan hamkorlik'
     ],
     requirements: [
-      'IELTS 6.5+ yoki CEFR B2 daraja (yoki tegishli til universiteti 2–4-kurs talabasi)',
-      'O‘quvchilar bilan muloyim va mas’uliyatli muloqot madaniyati',
-      'Darslarga vaqtida kelish va intizom'
+      'Kokand University yoki boshqa OTM talabasi (2–4 kurs)',
+      'Ingliz tili darajasi kamida B2 / IELTS 6.5+'
     ],
     workConditions: [
-      'Yorug‘, konditsionerli va zamonaviy xonalar',
-      'Ayol pedagoglar va talaba qizlardan iborat do‘stona jamoa (85% ayollar)',
-      'Markaz yonida metro (Novza) va jamoat transporti bekati (3 daqiqalik piyoda yo‘l)',
-      'Kechki darslar tugagach bepul choy/kofe va xavfsiz transport tavsiyasi'
+      'Dars jadvaliga moslashtirilgan grafik',
+      'Zamonaviy multimediya uskunalari bilan jihozlangan xonalar',
+      'Kechki smenadan so‘ng xavfsiz transport ta’minlanadi'
     ],
     safetyNotes: [
-      'Markaz binosida 24/7 qo‘riqlash xizmati va kuzatuv kameralari mavjud',
-      'Ish vaqti 19:00 da to‘liq tugaydi, kechki qo‘shimcha smenalar talab qilinmaydi',
-      'O‘qituvchilar xonasi alohida ajratilgan va qulflanadi'
+      'Bino kirishida va xonalarda videokuzatuv mavjud',
+      'Kokand University binosidan piyoda 5 daqiqalik masofa'
     ],
     employerInfo: {
       inn: '308 214 902',
-      verifiedSince: '2023-yil sentabr',
-      physicalAuditDate: '2026-yil 12-fevral',
-      femaleStaffRatio: '84%',
+      verifiedSince: '2026-yil',
+      physicalAuditDate: '2026-yil 15-mart',
+      femaleStaffRatio: '88%',
       eveningTransportSupported: true,
       cctvEquipped: true,
-      contactPerson: 'Zulxumor Rahimova (Kadrlar bo‘limi boshlig‘i)',
-      phone: '+998 71 200 44 88'
+      contactPerson: 'Zulxumor Rahimova',
+      phone: '+998 73 542 11 22'
     },
     safetyScores: {
       workEnvironment: 5.0,
-      scheduleIntegrity: 4.9,
-      teamRespect: 4.9,
+      scheduleIntegrity: 5.0,
+      teamRespect: 5.0,
       locationConvenience: 5.0,
-      eveningCommute: 4.8
+      eveningCommute: 5.0
     },
     reviews: [
       {
         id: 'rev-1',
-        author: 'Nargiza M.',
-        role: 'Ingliz tili repetitori',
-        university: 'O‘zDJTU 3-kurs',
-        comment: 'Dars jadvali universitetim bilan juda qulay moslashdi. 19:00 da darslar tugaydi va Novza metrosiga juda yaqin, yo‘l doim yorug‘ va odam gavjum.',
-        date: '14-fevral, 2026',
-        rating: 5
-      },
-      {
-        id: 'rev-2',
-        author: 'Dildora K.',
-        role: 'Speaking mentor',
-        university: 'Kokand University Toshkent',
-        comment: 'Maosh kechiktirilmasdan har oyning 5-sanasida beriladi. Jamoa juda hurmatli va yosh qizlarga alohida e’tibor bilan yordam berishadi.',
-        date: '28-yanvar, 2026',
+        author: 'Mohinur T.',
+        role: '3-kurs talabasi',
+        university: 'Kokand University',
+        comment: 'Darslarimdan keyin 15:30 da boraman, jamoa juda ahil, barcha xonalar xavfsiz va nazoratda.',
+        date: '24-mart 2026',
         rating: 5
       }
     ]
   },
   {
-    id: 'job-2',
-    title: 'Mijozlar bilan muloqot koordinatori (Kunduzgi/Kechki smena)',
-    company: 'Apex BPO Aloqa Markazi',
-    companyLogoText: 'AP',
-    companyCategory: 'Call center & BPO',
-    salaryMin: 4000000,
-    salaryMax: 6200000,
+    id: 'kokand-job-2',
+    title: 'Boshlang‘ich sinf o‘quvchilari uchun tutor / Repetitor',
+    company: 'Qo‘qon Ziyo Maskani Xususiy Maktabi',
+    companyLogoText: 'QZM',
+    companyCategory: 'Xususiy maktab',
+    salaryMin: 3200000,
+    salaryMax: 4800000,
     salaryPeriod: 'oyiga',
-    schedule: 'Moslashuvchan: 4 yoki 6 soat',
-    distanceKm: 1.4,
-    location: 'Yakkasaroy tumani, Shota Rustaveli ko‘chasi 53',
-    district: 'Yakkasaroy',
+    schedule: '14:30 – 18:00 (Haftada 4 kun)',
+    workingDays: ['Dushanba', 'Seshanba', 'Chorshanba', 'Payshanba'],
+    workingTimeOfDay: 'Tushdan so‘ng (Part-time)',
+    workingHoursStart: '14:30',
+    workingHoursEnd: '18:00',
+    distanceKm: 0.9,
+    location: 'Qo‘qon shahri, Navoiy mavzesi 12-bino',
+    district: 'Qo‘qon shahri',
     isVerified: true,
     verificationLevel: 'high',
-    safetyRating: 4.8,
-    reviewCount: 52,
-    jobType: 'flexible',
+    safetyRating: 4.9,
+    reviewCount: 9,
+    jobType: 'part-time',
     forStudents: true,
     noExperienceRequired: true,
-    postedDate: 'Bugun',
-    description: 'Zamonaviy biznes markazida joylashgan yirik mijozlar qo‘llab-quvvatlash xizmati. Faqat kiruvchi qo‘ng‘iroqlarga va Telegram bot orqali murojaatlarga javob berish. Sovuq qo‘ng‘iroqlar yo‘q.',
+    postedDate: 'Kecha',
+    description: 'Boshlang‘ich sinf o‘quvchilariga darsdan so‘ng uy vazifalarini bajarishda yordam berish va qo‘shimcha to‘garaklar olib borish.',
     responsibilities: [
-      'Kiruvchi qo‘ng‘iroqlar va onlayn chat murojaatlariga muloyim javob qaytarish',
-      'Mijozlar savollarini CRM tizimiga kiritish va yo‘naltirish',
-      'Kunlik smena hisobotini dasturda belgilash'
+      'O‘quvchilarning darslarini tayyorlashda ko‘maklashish',
+      'Kichik yoshdagi bolalar bilan qiziqarli rivojlantiruvchi o‘yinlar o‘tkazish'
     ],
     requirements: [
-      'O‘zbek tilida ravon so‘zlasha olish (rus tilini bilish ma’qullanadi)',
-      'Kompyuterda tez yozish va asosiy dasturlardan foydalanish ko‘nikmasi',
-      'Hushmuomala va stressga chidamlilik'
+      'Pedagogika, filologiya yoki boshlang‘ich ta’lim yo‘nalishi talabasi',
+      'Bolalar bilan muloqot qilish madaniyati va xushmuomalalik'
     ],
     workConditions: [
-      'Shinam ofis, bepul tushlik va doimiy qahva burchagi',
-      'Kechki 21:00 dan keyingi smenalarda xodimlar uchun kompaniya hisobidan bepul taksi ta’minlanadi',
-      'Talabalar sessiya paytida jadvalni vaqtincha yengillashtirish imkoniyati'
+      'Issiq ovqat va bepul choy/kofe ta’minlanadi',
+      'O‘qish sessiyasi vaqtida ta’til beriladi'
     ],
     safetyNotes: [
-      'A toifali biznes markaz, biometrik turniket va qo‘riqlash xizmati',
-      'Kechki smena tugaganda xodimlar korporativ Yandex Business taksisi bilan uylarigacha yetkaziladi',
-      'Alohida xodimlar xonasi va dam olish hududi'
+      'Maktab xavfsizlik xizmati va qo‘riqlash tizimi to‘liq nazoratida',
+      'Turniket va videokuzatuv mavjud'
     ],
     employerInfo: {
-      inn: '304 991 228',
-      verifiedSince: '2022-yil iyun',
-      physicalAuditDate: '2026-yil 18-yanvar',
-      femaleStaffRatio: '72%',
+      inn: '302 441 819',
+      verifiedSince: '2026-yil',
+      physicalAuditDate: '2026-yil 10-fevral',
+      femaleStaffRatio: '95%',
       eveningTransportSupported: true,
       cctvEquipped: true,
-      contactPerson: 'Nilufar Usmonova (HR direktori)',
-      phone: '+998 78 150 09 00'
+      contactPerson: 'Dilafruz Karimova',
+      phone: '+998 73 543 88 90'
     },
     safetyScores: {
       workEnvironment: 4.9,
-      scheduleIntegrity: 4.7,
-      teamRespect: 4.8,
-      locationConvenience: 4.7,
-      eveningCommute: 5.0
-    },
-    reviews: [
-      {
-        id: 'rev-3',
-        author: 'Shahnoza T.',
-        role: 'Operator',
-        university: 'TDIU 2-kurs',
-        comment: 'Eng katta afzalligi — kechki smenada ishlasangiz, uyingizgacha rasmiy taksi xizmati bepul olib boradi. Ota-onam ham xotirjam.',
-        date: '2-fevral, 2026',
-        rating: 5
-      }
-    ]
-  },
-  {
-    id: 'job-3',
-    title: 'Boshlang‘ich sinf yordamchi o‘qituvchisi',
-    company: 'SmartKids Xususiy Maktabi',
-    companyLogoText: 'SK',
-    companyCategory: 'Xususiy maktab',
-    salaryMin: 3500000,
-    salaryMax: 4800000,
-    salaryPeriod: 'oyiga',
-    schedule: '13:30 – 17:30',
-    distanceKm: 2.1,
-    location: 'Chilonzor tumani, Lutfiy ko‘chasi 28-A',
-    district: 'Chilonzor',
-    isVerified: true,
-    verificationLevel: 'high',
-    safetyRating: 5.0,
-    reviewCount: 29,
-    jobType: 'part-time',
-    forStudents: true,
-    noExperienceRequired: true,
-    postedDate: '3 kun oldin',
-    description: 'Xususiy maktabimizning uzaytirilgan kun guruhida (prodlyonka) 1–3-sinf o‘quvchilariga dars vazifalarini bajarishda yordam berish va ijodiy to‘garaklar tashkil qilish.',
-    responsibilities: [
-      'Bolalar bilan darsdan keyingi uy vazifalarini ko‘rib chiqish',
-      'Kitobxonlik soatlari va qiziqarli mantiqiy o‘yinlar o‘tkazish',
-      'Ota-onalar kelguniga qadar bolalar xavfsizligini ta’minlash'
-    ],
-    requirements: [
-      'Pedagogika, psixologiya yoki filologiya yo‘nalishidagi oliygoh talabasi',
-      'Bolalarga mehr va sabr-toqat bilan yondashish',
-      'Mas’uliyatlilik va tozalikka rioya qilish'
-    ],
-    workConditions: [
-      'Xususiy maktab hududi to‘liq panjara bilan o‘ralgan va qattiq nazoratda',
-      'Issiq tushlik maktab oshxonasida bepul taqdim etiladi',
-      'Pedagogik amaliyot o‘tash to‘g‘risida rasmiy tasdiqnoma beriladi'
-    ],
-    safetyNotes: [
-      'Faqat kunduzgi soatlar: 13:30 dan 17:30 gacha, qorong‘i tushmasdan tugaydi',
-      'Maktab xavfsizlik xizmati barcha tashrif buyuruvchilarni tekshiruvdan o‘tkazadi'
-    ],
-    employerInfo: {
-      inn: '307 441 519',
-      verifiedSince: '2023-yil avgust',
-      physicalAuditDate: '2026-yil 05-mart',
-      femaleStaffRatio: '92%',
-      eveningTransportSupported: false,
-      cctvEquipped: true,
-      contactPerson: 'Gulnora Karimova (O‘quv ishlari mudirasi)',
-      phone: '+998 71 277 81 90'
-    },
-    safetyScores: {
-      workEnvironment: 5.0,
       scheduleIntegrity: 5.0,
       teamRespect: 5.0,
       locationConvenience: 4.8,
       eveningCommute: 5.0
     },
+    reviews: []
+  },
+  {
+    id: 'kokand-job-3',
+    title: 'Qabul bo‘limi koordinatori / Administrator',
+    company: 'Kokand IT & Digital Hub',
+    companyLogoText: 'KDH',
+    companyCategory: 'IT va Raqamli markaz',
+    salaryMin: 4000000,
+    salaryMax: 6000000,
+    salaryPeriod: 'oyiga',
+    schedule: '15:00 – 19:00 (Moslashuvchan grafik)',
+    workingDays: ['Dushanba', 'Seshanba', 'Chorshanba', 'Payshanba', 'Juma', 'Shanba'],
+    workingTimeOfDay: 'Tushdan so‘ng (Part-time)',
+    workingHoursStart: '15:00',
+    workingHoursEnd: '19:00',
+    distanceKm: 0.6,
+    location: 'Qo‘qon shahri, Charxiy ko‘chasi 8',
+    district: 'Qo‘qon shahri',
+    isVerified: true,
+    verificationLevel: 'high',
+    safetyRating: 5.0,
+    reviewCount: 11,
+    jobType: 'part-time',
+    forStudents: true,
+    noExperienceRequired: true,
+    postedDate: 'Hozirgina',
+    description: 'IT kurslariga qiziqqan yoshlarga kurslar haqida ma’lumot berish, ro‘yxatga olish va o‘quv markazi ichki tartibini yuritish.',
+    responsibilities: [
+      'Mijozlar bilan telefon va ofisda muloqot qilish',
+      'CRM tizimida yangi o‘quvchilarni qayd etish'
+    ],
+    requirements: [
+      'Kompyuter savodxonligi (MS Office, Telegram)',
+      'Xushmuomala va mas’uliyatli talaba qizlar'
+    ],
+    workConditions: [
+      'Zamonaviy kovorking muhiti va qulay ish stoli',
+      'IT kurslarida 50% chegirma bilan ta’lim olish imkoniyati'
+    ],
+    safetyNotes: [
+      'Yopiq xavfsiz biznes markaz binosi',
+      'Avtobus bekatiga yaqin'
+    ],
+    employerInfo: {
+      inn: '309 881 220',
+      verifiedSince: '2026-yil',
+      physicalAuditDate: '2026-yil 20-yanvar',
+      femaleStaffRatio: '78%',
+      eveningTransportSupported: true,
+      cctvEquipped: true,
+      contactPerson: 'Sardorbek To‘xtayev',
+      phone: '+998 73 544 55 66'
+    },
+    safetyScores: {
+      workEnvironment: 5.0,
+      scheduleIntegrity: 5.0,
+      teamRespect: 5.0,
+      locationConvenience: 5.0,
+      eveningCommute: 5.0
+    },
+    reviews: []
+  },
+  {
+    id: 'kokand-job-restaurant-1',
+    title: 'Restoran administratori va zal xodimi (Qizlar uchun qulay & xavfsiz)',
+    company: 'Qo‘qon Milliy Taomlar & Saroy Restorani',
+    companyLogoText: 'QSR',
+    companyCategory: 'Restoran va Umumiy ovqatlanish',
+    salaryMin: 3800000,
+    salaryMax: 5500000,
+    salaryPeriod: 'oyiga',
+    schedule: '16:00 – 21:30 (Part-time, darsdan so‘ng)',
+    distanceKm: 0.5,
+    location: 'Qo‘qon shahri, Istiqlol ko‘chasi 45 (Shahar markazi, Shiroki ro‘parasi)',
+    district: 'Qo‘qon shahri',
+    isVerified: true,
+    verificationLevel: 'high',
+    safetyRating: 5.0,
+    reviewCount: 16,
+    jobType: 'part-time',
+    forStudents: true,
+    noExperienceRequired: true,
+    postedDate: 'Bugun',
+    description: 'Qo‘qon markazidagi nufuzli milliy restoran majmuasiga talaba qizlarni kassa ma’muri va mehmonlarni kutib olish (hostess) lavozimiga ishga taklif etamiz. Kechki smenadan so‘ng bepul xizmat mashinasi bilan uyga yetkazish va issiq ovqat kafolatlanadi.',
+    responsibilities: [
+      'Mehmonlarni tabassum bilan kutib olish va buyurtmalarni qabul qilish',
+      'Kassa hisob-kitoblarini yuritish (zamonaviy iiko dasturida, o‘rgatiladi)',
+      'Restoran ichki tozaligi va servis madaniyatini nazorat qilish'
+    ],
+    requirements: [
+      'Talaba qizlar (1–4 kurs), xushmuomala, ozoda va mas’uliyatli',
+      'O‘zbek tilida ravon muloqot qila olish (rus tilini bilish qo‘shimcha ustunlik)'
+    ],
+    workConditions: [
+      'Kuniga 2 mahal bepul issiq ovqat va dam olish xonasi',
+      'Kechki smena tugagach (21:30 da) shaxsiy xizmat avtomashinasida uyiga bepul yetkazish',
+      'Talabalik sessiyasi vaqtida ta’til berilishi kafolatlanadi'
+    ],
+    safetyNotes: [
+      'Restoranning barcha zallari va kirish hududi 360° videokuzatuv tizimi bilan jihozlangan',
+      'Litsenziyalangan qo‘riqlash xizmati 24/7 faoliyat yuritadi'
+    ],
+    employerInfo: {
+      inn: '305 119 402',
+      verifiedSince: '2026-yil',
+      physicalAuditDate: '2026-yil 18-mart',
+      femaleStaffRatio: '85%',
+      eveningTransportSupported: true,
+      cctvEquipped: true,
+      contactPerson: 'Malikaxon Rahimova',
+      phone: '+998 73 543 90 90'
+    },
+    safetyScores: {
+      workEnvironment: 5.0,
+      scheduleIntegrity: 5.0,
+      teamRespect: 5.0,
+      locationConvenience: 5.0,
+      eveningCommute: 5.0
+    },
     reviews: [
       {
-        id: 'rev-4',
-        author: 'Kamola R.',
-        role: 'Yordamchi pedagog',
-        university: 'Nizomiy nomidagi TDPU 4-kurs',
-        comment: 'Talabalar uchun haqiqiy amaliyot maktabi. Ish 17:30 da tugaydi, shuning uchun kechqurun bemalol o‘z darslarimni qilishga ulguraman.',
-        date: '20-fevral, 2026',
+        id: 'rev-rest-1',
+        author: 'Gulnoza M.',
+        role: 'Kokand University 2-kurs',
+        university: 'Kokand University',
+        comment: 'Juda shinam va madaniyatli joy. Smena tugagach har kuni mashina uyimning darvozasigacha xavfsiz eltib qo‘yadi.',
+        date: '28-mart 2026',
         rating: 5
       }
     ]
   },
   {
-    id: 'job-4',
-    title: 'SMM va Kontent Yaratuvchi (Masofaviy / Flexible)',
-    company: 'Kokand Edu Ta’lim Loyihasi',
-    companyLogoText: 'KE',
-    companyCategory: 'Online education',
-    salaryMin: 3200000,
+    id: 'kokand-job-callcenter-1',
+    title: 'Call-markaz operatori / Mijozlar bilan aloqa bo‘yicha maslahatchi',
+    company: 'Qo‘qon Aloqa & Contact Center (BPO Hub)',
+    companyLogoText: 'QAC',
+    companyCategory: 'Call markaz va Aloqa',
+    salaryMin: 3500000,
+    salaryMax: 5200000,
+    salaryPeriod: 'oyiga',
+    schedule: '14:00 – 19:00 (Part-time, 5 soatlik smena)',
+    distanceKm: 0.7,
+    location: 'Qo‘qon shahri, Turkiston ko‘chasi 88-uy (Hamkorbank ro‘parasida)',
+    district: 'Qo‘qon shahri',
+    isVerified: true,
+    verificationLevel: 'high',
+    safetyRating: 4.9,
+    reviewCount: 22,
+    jobType: 'part-time',
+    forStudents: true,
+    noExperienceRequired: true,
+    postedDate: 'Bugun',
+    description: 'Zamonaviy jihozlangan Qo‘qon call-markaziga kiruvchi qo‘ng‘iroqlarga javob berish va mijozlarga axborot xizmati ko‘rsatish bo‘yicha talabalarni ishga taklif qilamiz. Qizlar uchun maxsus qulay ofis, kofe-breyk va do‘stona yoshlar jamoasi.',
+    responsibilities: [
+      'Kiruvchi qo‘ng‘iroqlarga xushmuomalalik bilan javob berish va konsultatsiya berish',
+      'Mijozlar so‘rovlarini CRM dasturida qayd etish',
+      'Mijozlar mamnuniyatini oshirish'
+    ],
+    requirements: [
+      'O‘zbek tilida ravon nutq (rus tilini boshlang‘ich bilish ma’qullanadi)',
+      'Kompyuter savodxonligi va klaviaturada yoza olish',
+      'O‘rganishga ishtiyoq (ish jarayoni boshida 2 kun bepul trening o‘tkaziladi)'
+    ],
+    workConditions: [
+      'Zamonaviy ofis: individual qulay ish stoli, maxsus shovqinsiz quloqchinlar',
+      'Bepul choy, kofe va shirinliklar bilan ta’minlangan qulay dam olish xonasi',
+      'Universitet dars jadvaliga mos ravishda smena almashtirish imkoniyati'
+    ],
+    safetyNotes: [
+      'Zamonaviy biznes markaz binosi, elektron turniket va to‘liq videokuzatuv',
+      'Markaziy ko‘chada joylashgan, barcha jamoat transportlari bekatiga 1 daqiqalik yo‘l'
+    ],
+    employerInfo: {
+      inn: '307 882 119',
+      verifiedSince: '2026-yil',
+      physicalAuditDate: '2026-yil 12-mart',
+      femaleStaffRatio: '92%',
+      eveningTransportSupported: true,
+      cctvEquipped: true,
+      contactPerson: 'Shahnoza To‘rayeva',
+      phone: '+998 73 541 33 44'
+    },
+    safetyScores: {
+      workEnvironment: 5.0,
+      scheduleIntegrity: 5.0,
+      teamRespect: 4.9,
+      locationConvenience: 5.0,
+      eveningCommute: 5.0
+    },
+    reviews: [
+      {
+        id: 'rev-call-1',
+        author: 'Kamola O.',
+        role: '3-kurs talabasi',
+        university: 'Qo‘qon DPI',
+        comment: 'Darslarimdan keyin 14:00 da kelaman, 19:00 da chiqaman. Jamoa yosh qizlardan iborat, rahbarlar juda samimiy.',
+        date: '25-mart 2026',
+        rating: 5
+      }
+    ]
+  },
+  {
+    id: 'kokand-job-textile-1',
+    title: 'Textile fabrikasi sifat nazoratchisi (OTK / Part-time smena)',
+    company: 'Kokand Textile Fabrikasi MCHJ',
+    companyLogoText: 'KTF',
+    companyCategory: 'To‘qimachilik va Tikuvchilik (Textile Fabrikasi)',
+    salaryMin: 3600000,
     salaryMax: 5000000,
     salaryPeriod: 'oyiga',
-    schedule: 'Erkin grafik (Haftasiga 20 soat)',
-    distanceKm: 0.0,
-    location: 'Masofaviy (Online)',
-    district: 'Masofaviy',
-    isVerified: true,
-    verificationLevel: 'high',
-    safetyRating: 4.9,
-    reviewCount: 44,
-    jobType: 'remote',
-    forStudents: true,
-    noExperienceRequired: true,
-    postedDate: '1 kun oldin',
-    description: 'Qizlar uchun mo‘ljallangan ta’lim kurslarimizning Instagram va Telegram kanallari uchun foydali postlar, storislar va ta’limiy infografikalar tayyorlash. To‘liq uydan yoki universitet kovorkingidan ishlash mumkin.',
-    responsibilities: [
-      'Telegram va Instagram uchun haftalik post rejasini tuzish',
-      'Canva yoki Figma dasturlarida o‘quv kartochkalari yaratish',
-      'Komentariya va savollarga muloyim javob berish'
-    ],
-    requirements: [
-      'O‘zbek adabiy tilida savodli matn yoza olish',
-      'Smartfon yoki noutbukda vizual kontent tayyorlay olish',
-      'Kreativ fikrlash va qizlar auditoriyasi ehtiyojlarini tushunish'
-    ],
-    workConditions: [
-      '100% masofaviy ish — safar yoki yo‘l xarajatlari talab etilmaydi',
-      'Vazifalar haftalik sprintlar ko‘rinishida beriladi, dars jadvalingizga qarab xohlagan paytda ishlaysiz',
-      'Internet xarajatlari uchun har oy qo‘shimcha 200 000 so‘m kompensatsiya'
-    ],
-    safetyNotes: [
-      'Masofaviy faoliyat — kechki yo‘l xavfi mutlaqo yo‘q',
-      'Rasmiy o‘zini-o‘zi band qilgan shaxs yoki mehnat shartnomasi rasmiylashtiriladi'
-    ],
-    employerInfo: {
-      inn: '302 811 405',
-      verifiedSince: '2024-yil yanvar',
-      physicalAuditDate: '2026-yil 10-yanvar',
-      femaleStaffRatio: '90%',
-      eveningTransportSupported: false,
-      cctvEquipped: false,
-      contactPerson: 'Madina Boboyeva (Loyiha rahbari)',
-      phone: '+998 90 321 00 11'
-    },
-    safetyScores: {
-      workEnvironment: 5.0,
-      scheduleIntegrity: 5.0,
-      teamRespect: 4.9,
-      locationConvenience: 5.0,
-      eveningCommute: 5.0
-    },
-    reviews: [
-      {
-        id: 'rev-5',
-        author: 'Gulhayo S.',
-        role: 'SMM yordamchisi',
-        university: 'Kokand University 2-kurs',
-        comment: 'Talaba uchun eng zo‘r variant! Yotoqxonadan chiqmasdan, darslar oralig‘ida postlarni tayyorlab topshiraman. Rahbariyat juda madaniyatli.',
-        date: '1-mart, 2026',
-        rating: 5
-      }
-    ]
-  },
-  {
-    id: 'job-5',
-    title: 'Junior Frontend Dasturchi (Stajirovka / Part-time)',
-    company: 'IT Bilim Raqamli Markazi',
-    companyLogoText: 'IT',
-    companyCategory: 'IT kompaniya',
-    salaryMin: 4500000,
-    salaryMax: 7000000,
-    salaryPeriod: 'oyiga',
-    schedule: '14:00 – 18:30',
-    distanceKm: 3.2,
-    location: 'Yunusobod tumani, Amir Temur shox ko‘chasi 107-B',
-    district: 'Yunusobod',
-    isVerified: true,
-    verificationLevel: 'high',
-    safetyRating: 4.9,
-    reviewCount: 21,
-    jobType: 'internship',
-    forStudents: true,
-    noExperienceRequired: false,
-    postedDate: 'Kecha',
-    description: 'Ayollar va qizlarning IT sohasidagi faolligini oshirish doirasida ochilgan dasturlash stajirovkasi. Tajribali senior dasturchilar qo‘l ostida haqiqiy loyihalarda amaliyot o‘tash va keyinchalik to‘liq shtatga o‘tish imkoniyati.',
-    responsibilities: [
-      'React va TypeScript komponentlarini tayyor dizayn asosida yig‘ish',
-      'Saytlarning mobil moslashuvchanligini sinovdan o‘tkazish',
-      'Jamoaviy kod ko‘riklari (code review)da ishtirok etish'
-    ],
-    requirements: [
-      'HTML/CSS/JavaScript va React asoslarini bilish',
-      'Git bilan ishlash bo‘yicha boshlang‘ich tushuncha',
-      'O‘rganishga ishtiyoq va qat’iyat'
-    ],
-    workConditions: [
-      'Zamonaviy kovorking markazi (Shahriston metro bekatidan 4 daqiqa)',
-      'Kuchli ayol mentorlar tomonidan haftalik yakka darslar',
-      'Texnika bilan ta’minlash yoki shaxsiy noutbuk uchun qulay ish joyi'
-    ],
-    safetyNotes: [
-      'Metro bekatiga to‘g‘ridan-to‘g‘ri yorug‘ piyodalar yo‘lagi orqali o‘tiladi',
-      'Ish vaqti 18:30 da yakunlanadi, ortiqcha ish soatlari taqiqlangan'
-    ],
-    employerInfo: {
-      inn: '309 670 119',
-      verifiedSince: '2023-yil dekabr',
-      physicalAuditDate: '2026-yil 15-fevral',
-      femaleStaffRatio: '65%',
-      eveningTransportSupported: false,
-      cctvEquipped: true,
-      contactPerson: 'Malika Ergasheva (Lead Frontend)',
-      phone: '+998 71 230 90 90'
-    },
-    safetyScores: {
-      workEnvironment: 5.0,
-      scheduleIntegrity: 4.9,
-      teamRespect: 4.9,
-      locationConvenience: 4.8,
-      eveningCommute: 4.9
-    },
-    reviews: [
-      {
-        id: 'rev-6',
-        author: 'Sevinch A.',
-        role: 'Intern frontend',
-        university: 'TATU 3-kurs',
-        comment: 'Qizlar uchun IT muhiti juda samimiy. Hech kim kamsitmaydi, har qadamda yordam berishadi. Metro juda yaqin, kech qolish qo‘rquvi bo‘lmaydi.',
-        date: '25-fevral, 2026',
-        rating: 5
-      }
-    ]
-  },
-  {
-    id: 'job-6',
-    title: 'Kutubxona va resurs markazi koordinatori',
-    company: 'Kokand University Axborot Markazi',
-    companyLogoText: 'KU',
-    companyCategory: 'Oliy ta’lim',
-    salaryMin: 2800000,
-    salaryMax: 3600000,
-    salaryPeriod: 'oyiga',
-    schedule: '10:00 – 14:00 yoki 14:00 – 18:00',
-    distanceKm: 0.2,
-    location: 'Universitet bosh binosi, 2-qavat',
-    district: 'Universitet kampusi',
+    schedule: '14:30 – 18:30 (Part-time, darsdan so‘ng)',
+    distanceKm: 1.2,
+    location: 'Qo‘qon shahri, Yangi Chorsu ko‘chasi 18-uy (Sanoat hududi)',
+    district: 'Qo‘qon shahri',
     isVerified: true,
     verificationLevel: 'high',
     safetyRating: 5.0,
-    reviewCount: 67,
+    reviewCount: 34,
     jobType: 'part-time',
     forStudents: true,
     noExperienceRequired: true,
-    postedDate: '4 kun oldin',
-    description: 'O‘z universitetingiz kampusi ichida darslardan uzilmagan holda ishlash imkoniyati! Talabalar elektron bazasini yuritish, yangi kitoblarni qabul qilish va o‘quv zallarida tinchlikni ta’minlash.',
+    postedDate: 'Bugun',
+    description: 'Qo‘qondagi zamonaviy to‘qimachilik va tayyor kiyim-kechak fabrikamizga talaba qizlarni tayyor trikotaj mahsulotlari sifatini vizual tekshirish va qadoqlash bo‘limiga taklif qilamiz. Bepul xizmat avtobusi va issiq ovqat ta’minlanadi.',
     responsibilities: [
-      'Elektron kutubxona kartochkalarini rasmiylashtirish',
-      'Kitoblar fondini tartibga solish va talabalarga adabiyot topishda ko‘maklashish',
-      'Resurs markazi kompyuterlarining sozligini tekshirib turish'
+      'Tayyor trikotaj va kiyim mahsulotlarining tikilish sifatini tekshirish',
+      'Yorliqlar va shtrix-kodlarning to‘g‘riligini nazorat qilish',
+      'Sifat jurnali va elektron tizimga ma’lumotlarni kiritish'
     ],
     requirements: [
-      'Kokand University yoki hamkor OTM talabasi bo‘lish',
-      'Hushmuomala, kitoblarni sevuvchi va mas’uliyatli',
-      'Kamida 2 ta semestr davomida ishlash niyati'
+      'Talaba yoki yosh mutaxassis qizlar',
+      'Diqqatli, mas’uliyatli va intizomli bo‘lish',
+      'To‘qimachilik yo‘nalishidagi sertifikatlar yoki tavsiyanomalar ma’qullanadi'
     ],
     workConditions: [
-      'Universitet binosi ichida — transport uchun vaqt va mablag‘ sarflanmaydi',
-      'Darslar boshlanganida smenani almashtirish imkoniyati',
-      'Tinch va xotirjam akademik muhit'
+      'Bepul korxona xizmat avtobusi (shahar bo‘ylab qatnaydi)',
+      'Har kuni issiq tushlik va choy/kofe bilan ta’minlanadi',
+      'Yorug‘, toza, zamonaviy konditsionerli va havoni tozalash tizimli sex'
     ],
     safetyNotes: [
-      'Kampus xavfsizlik tizimi va videokuzatuv to‘liq ishlaydi',
-      'Faqat talabalar va universitet xodimlari kirishi mumkin bo‘lgan yopiq hudud'
+      'Sexlar va fabrika hududida 32 ta videokuzatuv kameralari o‘rnatilgan',
+      'Mehnat xavfsizligi bo‘yicha to‘liq instruktaj va shaxsiy himoya vositalari beriladi'
     ],
     employerInfo: {
-      inn: '305 119 443',
-      verifiedSince: '2021-yil sentabr',
-      physicalAuditDate: '2026-yil 01-fevral',
-      femaleStaffRatio: '78%',
-      eveningTransportSupported: false,
+      inn: '305 482 910',
+      verifiedSince: '2026-yil',
+      physicalAuditDate: '2026-yil 10-mart',
+      femaleStaffRatio: '88%',
+      eveningTransportSupported: true,
       cctvEquipped: true,
-      contactPerson: 'Gulchehra Yoqubova (Kutubxona mudirasi)',
-      phone: '+998 73 545 55 55'
+      contactPerson: 'Nargiza Yo‘ldosheva',
+      phone: '+998 73 542 12 34'
     },
     safetyScores: {
       workEnvironment: 5.0,
       scheduleIntegrity: 5.0,
       teamRespect: 5.0,
-      locationConvenience: 5.0,
+      locationConvenience: 4.9,
       eveningCommute: 5.0
     },
     reviews: [
       {
-        id: 'rev-7',
-        author: 'Diyora Q.',
-        role: 'Kutubxona assistenti',
-        university: 'Kokand University 4-kurs',
-        comment: 'Talabalik davrimdagi eng yaxshi ish bo‘ldi. Dars tugashi bilan shu yerga kiraman, hech qayerga borish shart emas. Ham pul topaman, ham kitob o‘qiyman.',
-        date: '10-yanvar, 2026',
+        id: 'rev-tex-1',
+        author: 'Nodira S.',
+        role: 'Talaba-amaliyotchi',
+        university: 'Kokand University',
+        comment: 'Fabrikada sharoitlar juda a’lo! Darsdan so‘ng xizmat avtobusi universitet yonidan olib ketadi va ishdan so‘ng uyga yetkazadi.',
+        date: '27-mart 2026',
         rating: 5
       }
     ]
   }
 ];
 
-export const INITIAL_APPLICATIONS: Application[] = [
-  {
-    id: 'app-1',
-    jobId: 'job-1',
-    jobTitle: 'English Tutor & Speaking Club Mentor',
-    company: 'Bright Academy',
-    appliedDate: '2026-03-24',
-    status: 'interview',
-    statusLabelUz: 'Suhbatga taklif qilindi',
-    note: 'Sizning rezyumeingiz ma’qullandi. 28-mart kuni soat 15:00 da tanishuv suhbatiga taklif etilasiz.',
-    interviewDate: '28-mart, 2026 — 15:00'
-  },
-  {
-    id: 'app-2',
-    jobId: 'job-4',
-    jobTitle: 'SMM va Kontent Yaratuvchi',
-    company: 'Kokand Edu Ta’lim Loyihasi',
-    appliedDate: '2026-03-22',
-    status: 'reviewing',
-    statusLabelUz: 'Ko‘rib chiqilmoqda',
-    note: 'Arizangiz HR mutaxassisi tomonidan o‘rganilmoqda (taxminan 1 ish kuni).'
-  },
-  {
-    id: 'app-3',
-    jobId: 'job-3',
-    jobTitle: 'Boshlang‘ich sinf yordamchi o‘qituvchisi',
-    company: 'SmartKids Xususiy Maktabi',
-    appliedDate: '2026-03-15',
-    status: 'accepted',
-    statusLabelUz: 'Ishga qabul qilindi',
-    note: 'Hujjatlarni rasmiylashtirish uchun kadrlar bo‘limiga murojaat qiling.'
-  }
-];
+export const INITIAL_APPLICATIONS: Application[] = [];
 
 export const MOCK_COMPANIONS: Companion[] = [
   {
@@ -613,23 +552,15 @@ export const CONVERSATIONS: Conversation[] = [
     type: 'employer',
     lastMessage: 'Assalomu alaykum Dilnoza! Rezyumeingiz bilan tanishdik, 28-martdagi suhbat vaqti sizga ma’qulmi?',
     lastMessageTime: '11:42',
-    unreadCount: 1,
+    unreadCount: 0,
     isVerified: true,
     messages: [
       {
         id: 'm1',
         sender: 'other',
         senderName: 'Zulxumor Rahimova',
-        text: 'Assalomu alaykum Dilnoza! HerPath orqali topshirgan arizangizni ko‘rib chiqdik.',
+        text: 'Assalomu alaykum Dilnoza! HerPath orqali murojaatingizni ko‘rib chiqdik.',
         time: '11:40'
-      },
-      {
-        id: 'm2',
-        sender: 'other',
-        senderName: 'Zulxumor Rahimova',
-        text: 'Rezyumeingiz bilan tanishdik, 28-martdagi suhbat vaqti sizga ma’qulmi?',
-        time: '11:42',
-        isDelivered: true
       }
     ]
   },
@@ -664,15 +595,6 @@ export const CONVERSATIONS: Conversation[] = [
 
 export const NOTIFICATIONS: AppNotification[] = [
   {
-    id: 'notif-1',
-    title: 'Suhbatga taklif etildingiz',
-    body: 'Bright Academy kompaniyasi sizni "English Tutor" lavozimiga suhbatga taklif qildi.',
-    category: 'application',
-    time: '24 daqiqa oldin',
-    isRead: false,
-    actionTab: 'applications'
-  },
-  {
     id: 'notif-2',
     title: 'Yo‘lingizda yangi hamroh topildi',
     body: 'Madina Sh. siz tanlagan yo‘nalish bo‘yicha 17:15 da harakatlanadi.',
@@ -688,16 +610,7 @@ export const NOTIFICATIONS: AppNotification[] = [
     category: 'safety',
     time: '3 soat oldin',
     isRead: true,
-    actionTab: 'safety'
-  },
-  {
-    id: 'notif-4',
-    title: 'Mos yangi ish o‘rni',
-    body: 'SmartKids Xususiy Maktabi sizning dars jadvalingizga mos yangi vakansiya e’lon qildi.',
-    category: 'job',
-    time: 'Kecha',
-    isRead: true,
-    actionTab: 'jobs'
+    actionTab: 'map'
   }
 ];
 
