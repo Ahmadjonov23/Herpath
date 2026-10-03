@@ -13,6 +13,8 @@ export interface JobSeekerProfile {
   courseYear: string;
   studyType?: string;
   district: string;
+  soha?: string;
+  mutaxassislik?: string;
   desiredPosition?: string;
   expectedSalary?: string;
   preferredHours: string;
@@ -24,7 +26,7 @@ export interface JobSeekerProfile {
   workingHoursEnd?: string;
   languages?: string[];
   skills: string[];
-  interests: string[];
+  interests?: string[];
   experience?: string;
   bio?: string;
   safetyPreferences?: {
@@ -156,6 +158,27 @@ export interface Application {
   statusLabelUz: string;
   note?: string;
   interviewDate?: string;
+  applicantName?: string;
+  applicantPhone?: string;
+  applicantEmail?: string;
+  applicantUniversity?: string;
+  applicantStudyType?: string;
+  applicantCourseYear?: string;
+  applicantDistrict?: string;
+  applicantSoha?: string;
+  applicantMutaxassislik?: string;
+  applicantBirthDate?: string;
+  applicantExpectedSalary?: string;
+  applicantPreferredDays?: string[];
+  applicantWorkingTimeOfDay?: string;
+  applicantWorkingHoursStart?: string;
+  applicantWorkingHoursEnd?: string;
+  applicantExperience?: string;
+  applicantBio?: string;
+  applicantSkills?: string[];
+  applicantLanguages?: string[];
+  applicantCertificates?: any[];
+  applicantRecommendations?: any[];
 }
 
 export interface Companion {
@@ -223,4 +246,7 @@ export interface AppNotification {
   isRead: boolean;
   actionTab?: TabType;
   actionId?: string;
+  targetRole?: 'job_seeker' | 'employer' | 'all';
+  targetCompany?: string;
+  targetPhone?: string;
 }

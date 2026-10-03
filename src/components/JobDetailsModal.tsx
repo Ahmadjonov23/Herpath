@@ -240,7 +240,7 @@ export const JobDetailsModal: React.FC<JobDetailsModalProps> = ({
               onClick={() => onOpenVerification(job)}
               className="text-xs font-semibold text-[#802244] hover:underline flex items-center gap-1 cursor-pointer"
             >
-              <span>HerPath audit ma’lumotlarini ko‘rish →</span>
+              <span>Soatbay audit ma’lumotlarini ko‘rish →</span>
             </button>
           </div>
 

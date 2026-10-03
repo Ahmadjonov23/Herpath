@@ -132,7 +132,7 @@ export const UniversityPartnersView: React.FC<UniversityPartnersViewProps> = ({
           {partnerRequestSent ? (
             <div className="p-3.5 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs flex items-center gap-2">
               <Check className="w-4 h-4 text-emerald-700 shrink-0" />
-              <span>Hamkorlik so‘rovi qabul qilindi. HerPath muvofiqlashtiruvchisi tez orada siz bilan bog‘lanadi.</span>
+              <span>Hamkorlik so‘rovi qabul qilindi. Soatbay muvofiqlashtiruvchisi tez orada siz bilan bog‘lanadi.</span>
             </div>
           ) : (
             <form onSubmit={handlePartnerSubmit} className="space-y-2.5 text-xs">

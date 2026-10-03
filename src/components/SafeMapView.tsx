@@ -1238,7 +1238,7 @@ export const SafeMapView: React.FC<SafeMapViewProps> = ({
                       setInfoWindowTarget({
                         type: 'destination',
                         title: destinationName,
-                        desc: `${destinationCoords.address}. HerPath auditi o‘tkazilgan xavfsiz bino.`,
+                        desc: `${destinationCoords.address}. Soatbay auditi o‘tkazilgan xavfsiz bino.`,
                         coords: destinationCoords
                       });
                     }}
@@ -1286,7 +1286,7 @@ export const SafeMapView: React.FC<SafeMapViewProps> = ({
                   {/* Student Companions Markers */}
                   {(activeLayer === 'all' || activeLayer === 'companions') && (
                     <>
-                      {MOCK_COMPANIONS.map((comp) => {
+                      {MOCK_COMPANIONS.map((comp: any) => {
                         const coords = {
                           lat: 41.2847 + (comp.distanceMeters * 0.00003),
                           lng: 69.2081 + (comp.distanceMeters * 0.00004)

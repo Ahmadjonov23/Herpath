@@ -16,7 +16,7 @@ export const ApplicationsView: React.FC<ApplicationsViewProps> = ({
   onOpenChat,
   onExploreJobs
 }) => {
-  const [filter, setFilter] = useState<'all' | 'interview' | 'reviewing' | 'accepted'>('all');
+  const [filter, setFilter] = useState<'all' | 'interview' | 'reviewing' | 'accepted' | 'rejected'>('all');
 
   const filteredApps = applications.filter((app) => {
     if (filter === 'all') return true;
@@ -30,6 +30,13 @@ export const ApplicationsView: React.FC<ApplicationsViewProps> = ({
           <span className="text-[11px] font-semibold text-[#802244] bg-[#802244]/10 border border-[#802244]/20 px-2 py-0.5 rounded flex items-center gap-1">
             <Calendar className="w-3 h-3" />
             <span>{label}</span>
+          </span>
+        );
+      case 'rejected':
+        return (
+          <span className="text-[11px] font-semibold text-rose-800 bg-rose-50 border border-rose-200 px-2 py-0.5 rounded flex items-center gap-1">
+            <AlertCircle className="w-3 h-3 text-rose-700" />
+            <span>{label || 'Rad etildi'}</span>
           </span>
         );
       case 'accepted':
@@ -95,6 +102,26 @@ export const ApplicationsView: React.FC<ApplicationsViewProps> = ({
               }`}
             >
               Kutilmoqda
+            </button>
+            <button
+              onClick={() => setFilter('accepted')}
+              className={`px-2.5 py-1 text-xs font-semibold rounded-md transition-colors cursor-pointer ${
+                filter === 'accepted'
+                  ? 'bg-white text-stone-900 shadow-2xs'
+                  : 'text-stone-600 hover:text-stone-900'
+              }`}
+            >
+              Qabul qilingan
+            </button>
+            <button
+              onClick={() => setFilter('rejected')}
+              className={`px-2.5 py-1 text-xs font-semibold rounded-md transition-colors cursor-pointer ${
+                filter === 'rejected'
+                  ? 'bg-white text-stone-900 shadow-2xs'
+                  : 'text-stone-600 hover:text-stone-900'
+              }`}
+            >
+              Rad etilgan
             </button>
           </div>
         </div>

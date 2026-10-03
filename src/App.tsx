@@ -6,14 +6,17 @@ import {
   Application,
   Companion,
   JobSeekerProfile,
-  EmployerProfile
+  EmployerProfile,
+  AppNotification
 } from './types';
 import {
-  INITIAL_JOBS,
-  INITIAL_APPLICATIONS,
-  NOTIFICATIONS,
-  CONVERSATIONS
-} from './data/mockData';
+  getStoredJobs,
+  saveStoredJobs,
+  getStoredApplications,
+  saveStoredApplications,
+  getStoredNotifications,
+  saveStoredNotifications
+} from './data/store';
 import { Navbar } from './components/Navbar';
 import { BottomNav } from './components/BottomNav';
 import { LandingPageView } from './components/LandingPageView';
@@ -34,6 +37,7 @@ import { AdminVerificationView } from './components/AdminVerificationView';
 import { OnboardingModal } from './components/OnboardingModal';
 import { AuthModal } from './components/AuthModal';
 import { AdminLoginModal } from './components/AdminLoginModal';
+import { BrandLogo } from './components/BrandLogo';
 import { CheckCircle2, ShieldCheck } from 'lucide-react';
 
 export default function App() {
@@ -41,89 +45,44 @@ export default function App() {
   const [currentTab, setCurrentTab] = useState<TabType>('home');
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [userRole, setUserRole] = useState<UserRole>('job_seeker');
-  const [userName, setUserName] = useState<string>('Dilnoza Karimova');
+  const [userName, setUserName] = useState<string>('Foydalanuvchi');
 
-  // Detailed standard profile state for both user types
+  // Detailed standard profile state for both user types (Clean initial state - NO demo data!)
   const [jobSeekerProfile, setJobSeekerProfile] = useState<JobSeekerProfile | undefined>({
-    fullName: 'Dilnoza Karimova',
-    phone: '+998 90 123 45 67',
-    email: 'dilnoza.karimova@edu.uz',
-    birthDate: '2004-05-14',
-    gender: 'Ayol',
+    fullName: '',
+    phone: '',
+    email: '',
     university: 'Kokand University',
-    faculty: 'Dizayn va amaliy san’at / To‘qimachilik texnologiyalari',
-    courseYear: '3-kurs talabasi',
+    faculty: '',
+    courseYear: '1-kurs talabasi',
     studyType: 'Kunduzgi',
-    district: 'Qo‘qon shahri, Shoxruxobod mavzesi',
-    desiredPosition: 'Tekstil konstruktori / Tikuvchilik ustasi yordamchisi',
+    district: 'Qo‘qon shahri',
     expectedSalary: '3 500 000 – 5 000 000 so‘m',
     preferredHours: 'Part-time (14:30 dan so‘ng)',
-    freeHours: '14:30 – 19:00 (Dushanba-Juma)',
-    languages: ['O‘zbek tili (Ona tili)', 'Rus tili (Erkin)', 'Ingliz tili (IELTS 7.0)'],
-    skills: ['Tikuv mashinalari bilan ishlash', 'Lekalo va bichish', 'Kompyuter savodxonligi', 'Figma', 'Jamoada ishlash'],
-    interests: ['To‘qimachilik sanoati', 'Kiyim dizayni', 'Xorijiy tillar'],
-    experience: '1 yillik tikuvchilik va modellashtirish amaliyoti',
-    bio: 'Kokand University talabasiman. Tikuvchilik va kiyim-kechak ishlab chiqarish sohasida bilim va amaliy ko‘nikmaga egaman. Darsdan so‘ng xavfsiz to‘qimachilik fabrikasida ishlashni xohlayman.',
-    safetyPreferences: {
-      cctvRequired: true,
-      transportRequired: true,
-      femaleStaffOnly: false
-    },
-    certificates: [
-      {
-        id: 'cert-1',
-        title: 'Tikuvchilik-modellash va trikotaj mahsulotlari texnologi',
-        issuer: 'Qo‘qon Hunarmandchilik va Kasbiy Ta’lim Markazi',
-        date: '2025-yil',
-        fileName: 'tikuvchilik_mutaxassislik_sertifikati.pdf'
-      },
-      {
-        id: 'cert-2',
-        title: 'Ingliz tili IELTS 7.0 Xalqaro sertifikati',
-        issuer: 'British Council Uzbekistan',
-        date: '2025-yil',
-        fileName: 'ielts_certificate_dilnoza.pdf'
-      }
-    ],
-    recommendations: [
-      {
-        id: 'rec-1',
-        recommenderName: 'Prof. Xursheda Rahimova',
-        organization: 'Kokand University',
-        role: 'Fakultet dekani o‘rinbosari',
-        phone: '+998 91 234 56 78',
-        text: 'Dilnoza Karimova intiluvchan, darslarda namunali va o‘z mutaxassisligini chuqur o‘rganayotgan iqtidorli talaba. Jamoada halol va mas’uliyatli faoliyat yuritishiga to‘liq kafolat beraman.',
-        fileName: 'dekanat_tavsiyanomasi.pdf'
-      }
-    ]
+    freeHours: '14:30 – 18:30',
+    preferredDays: ['Dushanba', 'Seshanba', 'Chorshanba', 'Payshanba', 'Juma'],
+    workingTimeOfDay: 'Tushdan so‘ng (Part-time)',
+    workingHoursStart: '14:30',
+    workingHoursEnd: '18:30',
+    skills: [],
+    languages: ['O‘zbek tili']
   });
 
   const [employerProfile, setEmployerProfile] = useState<EmployerProfile | undefined>({
-    companyName: 'Kokand Textile Fabrikasi MCHJ',
-    inn: '305 482 910',
-    legalType: 'MCHJ (To‘qimachilik qo‘shma korxonasi)',
-    category: 'To‘qimachilik va Tikuvchilik (Textile Fabrikasi)',
-    address: 'Qo‘qon shahri, Yangi Chorsu ko‘chasi 18-uy (Sanoat hududi)',
-    landmark: 'Qo‘qon Erkin Iqtisodiy Zonasi, 2-sanoat zonasi',
-    contactPerson: 'Nargiza Yo‘ldosheva',
-    contactRole: 'Kadrlar bo‘limi boshlig‘i va HR direktori',
-    phone: '+998 73 542 12 34',
-    email: 'hr@kokandtextile.uz',
-    website: 'https://kokandtextile.uz',
-    employeeCount: '450+ nafar (88% xotin-qizlar)',
-    description: 'Qo‘qon shahrining yetakchi to‘qimachilik va tayyor kiyim-kechak fabrikasi. Talaba qizlar va yosh mutaxassislar uchun qulay darsdan keyingi smenalar, bepul xizmat avtobusi, issiq ovqat va to‘liq videokuzatuv tizimi yaratilgan.',
+    companyName: 'Ish beruvchi tashkilot',
+    inn: '',
+    legalType: 'MCHJ',
+    category: 'Xususiy korxona',
+    address: 'Qo‘qon shahri',
+    contactPerson: 'Mas’ul vakil',
+    phone: '',
+    email: '',
     eveningTransportSupported: true,
     cctvEquipped: true,
     formalContractGuaranteed: true,
-    femaleStaffRatio: '88%',
+    femaleStaffRatio: '75%',
     verifiedSince: '2026-yil',
-    isVerified: true,
-    permitFile: {
-      name: 'davlat_ruxsatnomasi_kokand_textile_2026.pdf',
-      size: '2.4 MB',
-      uploadDate: '2026-yil 12-fevral',
-      type: 'application/pdf'
-    }
+    isVerified: true
   });
 
   // Modals state
@@ -141,10 +100,11 @@ export default function App() {
   const [verificationModalOpen, setVerificationModalOpen] = useState(false);
   const [verificationJob, setVerificationJob] = useState<Job | null>(null);
 
-  // Data state
-  const [jobs, setJobs] = useState<Job[]>(INITIAL_JOBS);
+  // Data state (Initialized from store: real listings and applications only!)
+  const [jobs, setJobs] = useState<Job[]>(() => getStoredJobs());
   const [savedJobIds, setSavedJobIds] = useState<Set<string>>(new Set());
-  const [applications, setApplications] = useState<Application[]>(INITIAL_APPLICATIONS);
+  const [applications, setApplications] = useState<Application[]>(() => getStoredApplications());
+  const [notifications, setNotifications] = useState<AppNotification[]>(() => getStoredNotifications());
   const [filterPreset, setFilterPreset] = useState<string | undefined>(undefined);
 
   // Toast notification state
@@ -157,7 +117,7 @@ export default function App() {
     }, 3200);
   };
 
-  // URL Hash check for direct admin access (#admin)
+  // URL Hash check for direct admin access (#admin) and Store state sync
   useEffect(() => {
     const checkHash = () => {
       if (window.location.hash === '#admin') {
@@ -166,7 +126,21 @@ export default function App() {
     };
     checkHash();
     window.addEventListener('hashchange', checkHash);
-    return () => window.removeEventListener('hashchange', checkHash);
+
+    const syncJobs = () => setJobs(getStoredJobs());
+    const syncApps = () => setApplications(getStoredApplications());
+    const syncNotifs = () => setNotifications(getStoredNotifications());
+
+    window.addEventListener('soatbay_jobs_updated', syncJobs);
+    window.addEventListener('soatbay_applications_updated', syncApps);
+    window.addEventListener('soatbay_notifications_updated', syncNotifs);
+
+    return () => {
+      window.removeEventListener('hashchange', checkHash);
+      window.removeEventListener('soatbay_jobs_updated', syncJobs);
+      window.removeEventListener('soatbay_applications_updated', syncApps);
+      window.removeEventListener('soatbay_notifications_updated', syncNotifs);
+    };
   }, []);
 
   // Open Auth Modal helper
@@ -212,24 +186,130 @@ export default function App() {
     setVerificationModalOpen(true);
   };
 
-  // Apply to job
+  // Apply to job (Sends real application + notification message to employer profile!)
   const handleApplySuccess = (job: Job) => {
     if (!isLoggedIn) {
       handleOpenAuth('sign_in', 'job_seeker');
       return;
     }
+
+    const applicantName = jobSeekerProfile?.fullName?.trim() || userName || 'Ish izlovchi';
+
     const newApp: Application = {
       id: `app-${Date.now()}`,
       jobId: job.id,
       jobTitle: job.title,
       company: job.company,
-      appliedDate: 'Bugun',
+      appliedDate: 'Hozirgina',
       status: 'reviewing',
       statusLabelUz: 'Ko‘rib chiqilmoqda',
-      note: 'Arizangiz HR mutaxassisi tomonidan o‘rganilmoqda.'
+      note: 'Arizangiz ish beruvchi tomonidan o‘rganilmoqda.',
+      applicantName: applicantName,
+      applicantPhone: jobSeekerProfile?.phone || '+998 90 123 45 67',
+      applicantEmail: jobSeekerProfile?.email,
+      applicantUniversity: jobSeekerProfile?.university || 'OTM talabasi',
+      applicantCourseYear: jobSeekerProfile?.courseYear || 'Talaba',
+      applicantStudyType: jobSeekerProfile?.studyType || 'Kunduzgi',
+      applicantDistrict: jobSeekerProfile?.district || 'Qo‘qon shahri',
+      applicantSoha: jobSeekerProfile?.soha || '',
+      applicantMutaxassislik: jobSeekerProfile?.mutaxassislik || '',
+      applicantExpectedSalary: jobSeekerProfile?.expectedSalary || 'Kelishilgan holda',
+      applicantPreferredDays: jobSeekerProfile?.preferredDays || ['Dushanba', 'Seshanba', 'Chorshanba', 'Payshanba', 'Juma'],
+      applicantWorkingTimeOfDay: jobSeekerProfile?.workingTimeOfDay || 'Tushdan so‘ng (Part-time)',
+      applicantWorkingHoursStart: jobSeekerProfile?.workingHoursStart || '14:30',
+      applicantWorkingHoursEnd: jobSeekerProfile?.workingHoursEnd || '18:30',
+      applicantExperience: jobSeekerProfile?.experience,
+      applicantBio: jobSeekerProfile?.bio,
+      applicantSkills: jobSeekerProfile?.skills || [],
+      applicantLanguages: jobSeekerProfile?.languages || ['O‘zbek tili'],
+      applicantCertificates: jobSeekerProfile?.certificates || [],
+      applicantRecommendations: jobSeekerProfile?.recommendations || []
     };
-    setApplications([newApp, ...applications]);
-    showToast(`"${job.title}" lavozimiga arizangiz muvaffaqiyatli yuborildi!`);
+
+    setApplications((prev) => {
+      const updated = [newApp, ...prev];
+      saveStoredApplications(updated);
+      return updated;
+    });
+
+    // Send application notification to the employer's profile
+    const employerNotif: AppNotification = {
+      id: `notif-${Date.now()}`,
+      title: 'Yangi ariza kelib tushdi!',
+      body: `${applicantName}${jobSeekerProfile?.mutaxassislik ? ` (${jobSeekerProfile.mutaxassislik})` : ''} sizning "${job.title}" e'loningizga ariza yubordi. Rezyumeni tekshirishingiz mumkin.`,
+      category: 'application',
+      time: 'Hozirgina',
+      isRead: false,
+      targetRole: 'employer',
+      targetCompany: job.company
+    };
+
+    setNotifications((prev) => {
+      const updated = [employerNotif, ...prev];
+      saveStoredNotifications(updated);
+      return updated;
+    });
+
+    showToast(`"${job.title}" lavozimiga arizangiz yuborildi va ish beruvchiga bildirishnoma yetkazildi!`);
+  };
+
+  // Employer creates a new job (immediately appears in job seekers feed & saved to store!)
+  const handleCreateJob = (newJob: Job) => {
+    setJobs((prev) => {
+      const updated = [newJob, ...prev];
+      saveStoredJobs(updated);
+      return updated;
+    });
+    showToast(`"${newJob.title}" yangi vakansiyasi barcha ish izlovchilarga taqdim etildi!`);
+  };
+
+  // Employer approves or rejects application (immediately notifies job seeker!)
+  const handleUpdateApplicationStatus = (appId: string, newStatus: 'interview' | 'accepted' | 'rejected') => {
+    let updatedJobTitle = 'Vakansiya';
+    let updatedCompany = 'Ish beruvchi';
+
+    setApplications((prev) => {
+      const updated = prev.map((a) => {
+        if (a.id === appId) {
+          updatedJobTitle = a.jobTitle;
+          updatedCompany = a.company;
+          return {
+            ...a,
+            status: newStatus,
+            statusLabelUz: newStatus === 'interview' ? 'Suhbat belgilandi' : newStatus === 'accepted' ? 'Qabul qilindi' : 'Rad etildi',
+            note: newStatus === 'interview'
+              ? 'Ish beruvchi sizni suhbatga taklif qildi!'
+              : newStatus === 'accepted'
+              ? 'Tabriklaymiz, siz ishga qabul qilindingiz!'
+              : 'Arizangiz rad etildi.'
+          };
+        }
+        return a;
+      });
+      saveStoredApplications(updated);
+      return updated;
+    });
+
+    // Notification message to the job seeker
+    const seekerNotif: AppNotification = {
+      id: `notif-${Date.now()}`,
+      title: newStatus === 'rejected' ? 'Arizangiz rad etildi' : 'Arizangiz tasdiqlandi!',
+      body: newStatus === 'rejected'
+        ? `"${updatedJobTitle}" vakansiyasi bo‘yicha arizangiz ${updatedCompany} tomonidan rad etildi.`
+        : `Tabriklaymiz! "${updatedJobTitle}" bo‘yicha arizangiz ${updatedCompany} tomonidan tasdiqlandi va suhbat belgilandi!`,
+      category: 'application',
+      time: 'Hozirgina',
+      isRead: false,
+      targetRole: 'job_seeker'
+    };
+
+    setNotifications((prev) => {
+      const updated = [seekerNotif, ...prev];
+      saveStoredNotifications(updated);
+      return updated;
+    });
+
+    showToast(`Nomzod holati yangilandi va nomzod profiliga bildirishnoma yuborildi!`);
   };
 
   // View job on map
@@ -336,10 +416,8 @@ export default function App() {
       return (
         <EmployerDashboardView
           onOpenChat={() => setCurrentTab('chat')}
-          onCreateJob={(newJob) => {
-            setJobs((prev) => [newJob, ...prev]);
-            showToast(`"${newJob.title}" yangi vakansiyasi joylashtirildi!`);
-          }}
+          onCreateJob={handleCreateJob}
+          activeJobs={jobs}
           activeJobsCount={jobs.length}
           employerProfile={employerProfile}
           onUpdateEmployerProfile={(upd) => {
@@ -347,6 +425,9 @@ export default function App() {
             setUserName(upd.companyName);
             showToast("Tashkilot rekvizitlari saqlandi!");
           }}
+          applications={applications}
+          onUpdateApplicationStatus={handleUpdateApplicationStatus}
+          notifications={notifications}
         />
       );
     }
@@ -412,6 +493,7 @@ export default function App() {
       case 'notifications':
         return (
           <NotificationsView
+            notifications={notifications.filter(n => n.targetRole !== 'employer')}
             onNavigateTab={(tab) => setCurrentTab(tab)}
           />
         );
@@ -429,6 +511,8 @@ export default function App() {
             onReplayOnboarding={() => setOnboardingOpen(true)}
             onLogout={handleLogout}
             profileData={jobSeekerProfile}
+            applications={applications}
+            notifications={notifications}
             onUpdateProfile={(upd) => {
               setJobSeekerProfile(upd);
               setUserName(upd.fullName);
@@ -446,6 +530,9 @@ export default function App() {
         currentTab={currentTab}
         onSelectTab={(tab) => setCurrentTab(tab)}
         savedCount={savedJobIds.size}
+        unreadNotificationsCount={
+          notifications.filter((n) => (userRole === 'employer' ? n.targetRole === 'employer' : n.targetRole !== 'employer') && !n.isRead).length
+        }
         userName={userName}
         userRole={userRole}
         isLoggedIn={isLoggedIn}
@@ -470,12 +557,9 @@ export default function App() {
       <footer className="border-t border-stone-200 bg-white py-8 px-4 sm:px-6 text-xs text-stone-500">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-3">
-            <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#E51B24] to-[#B91C1C] text-white font-extrabold text-xs flex items-center justify-center">
-              HP
-            </div>
-            <span className="font-bold text-stone-900 text-sm">HerPath</span>
+            <BrandLogo size="sm" showText={true} />
             <span aria-hidden="true" className="text-stone-300">·</span>
-            <span>Qo‘qon shahri talabalari uchun xavfsiz va qulay ish o‘rinlari</span>
+            <span>Talabalar va yoshlar uchun qulay soatbay ishlar platformasi</span>
           </div>
 
           <div className="flex items-center gap-5 text-stone-600 flex-wrap justify-center">
@@ -489,7 +573,7 @@ export default function App() {
               onClick={() => handleSwitchRoleTab(userRole === 'employer' ? 'job_seeker' : 'employer')}
               className="hover:text-stone-900 transition-colors cursor-pointer"
             >
-              {userRole === 'employer' ? 'Ish qidiruvchi (Talaba)' : 'Xodim qidiruvchi (Ish beruvchi)'}
+              {userRole === 'employer' ? 'Ish izlovchi' : 'Ish beruvchi'}
             </button>
             <button
               onClick={() => setOnboardingOpen(true)}
@@ -510,7 +594,7 @@ export default function App() {
           </div>
 
           <div className="text-stone-400 text-center md:text-right">
-            © 2026 HerPath. Toshkent, O‘zbekiston.
+            © 2026 Soatbay. O‘zbekiston.
           </div>
         </div>
       </footer>
@@ -543,7 +627,7 @@ export default function App() {
         initialPhone={authModalConfig.initialPhone}
       />
 
-      {/* Admin Login Modal (Login: admin@herpath.uz / Parol: admin2026) */}
+      {/* Admin Login Modal (Login: admin@soatbay.uz / Parol: admin2026) */}
       <AdminLoginModal
         isOpen={adminLoginModalOpen}
         onClose={() => setAdminLoginModalOpen(false)}

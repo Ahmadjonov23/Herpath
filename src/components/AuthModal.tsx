@@ -57,27 +57,27 @@ export const AuthModal: React.FC<AuthModalProps> = ({
   // -------------------------------------------------------------
   const [seekerForm, setSeekerForm] = useState({
     fullName: '',
-    phone: '+998 ',
+    phone: initialPhone || '+998 ',
     email: '',
-    birthDate: '2004-05-14',
+    birthDate: '',
     gender: 'Ayol',
     university: 'Kokand University',
-    faculty: 'Dizayn, to‘qimachilik va amaliy san’at',
-    courseYear: '3-kurs talabasi',
+    courseYear: '1-kurs talabasi',
     studyType: 'Kunduzgi',
-    district: 'Qo‘qon shahri, Shoxruxobod mavzesi',
-    desiredPosition: 'Tekstil konstruktori / Tikuvchilik ustasi yordamchisi',
-    expectedSalary: '3 500 000 – 5 000 000 so‘m',
-    preferredHours: 'Part-time (14:30 dan so‘ng)',
-    freeHours: '14:30 – 19:00 (Dushanba-Juma)',
+    district: 'Qo‘qon shahri',
+    soha: 'Ta’lim va repetitorlik',
+    mutaxassislik: '',
+    expectedSalary: '',
+    preferredHours: 'Part-time',
+    freeHours: '',
     preferredDays: ['Dushanba', 'Seshanba', 'Chorshanba', 'Payshanba', 'Juma'] as string[],
-    workingTimeOfDay: 'Tushdan so‘ng (Part-time / Darsdan keyin)',
+    workingTimeOfDay: 'Tushdan so‘ng (Part-time)',
     workingHoursStart: '14:30',
-    workingHoursEnd: '19:00',
-    languages: 'O‘zbek tili (Ona tili), Rus tili (B2), Ingliz tili (IELTS 7.0)',
-    skills: 'Tikuv mashinalari bilan ishlash, Lekalo va bichish, Kompyuter savodxonligi, Jamoada ishlash',
-    experience: '1 yillik tikuvchilik va modellashtirish amaliyoti',
-    bio: 'Kokand University talabasiman. Tikuvchilik va kiyim-kechak ishlab chiqarish sohasida bilim va amaliy ko‘nikmaga egaman. Darsdan so‘ng xavfsiz korxonada ishlashni xohlayman.',
+    workingHoursEnd: '18:30',
+    languages: 'O‘zbek tili',
+    skills: '',
+    experience: '',
+    bio: '',
     cctvRequired: true,
     transportRequired: true,
     femaleStaffOnly: false,
@@ -90,34 +90,34 @@ export const AuthModal: React.FC<AuthModalProps> = ({
   });
 
   // -------------------------------------------------------------
-  // 2. XODIM QIDIRUVCHI (E'LON BERUVCHI) - STANDART TO'LIQ MA'LUMOTLAR
+  // 2. ISH BERUVCHI (E'LON BERUVCHI) - STANDART TO'LIQ MA'LUMOTLAR
   // -------------------------------------------------------------
   const [employerForm, setEmployerForm] = useState({
     companyName: '',
     inn: '',
-    legalType: 'MCHJ (To‘qimachilik qo‘shma korxonasi)',
-    category: 'To‘qimachilik va Tikuvchilik (Textile Fabrikasi)',
-    address: 'Qo‘qon shahri, Yangi Chorsu ko‘chasi 18-uy (Sanoat hududi)',
-    landmark: 'Qo‘qon Erkin Iqtisodiy Zonasi, 2-sanoat zonasi',
+    legalType: 'MCHJ',
+    category: 'Xususiy korxona',
+    address: 'Qo‘qon shahri',
+    landmark: '',
     contactPerson: '',
-    contactRole: 'Kadrlar bo‘limi boshlig‘i va HR direktori',
-    phone: '+998 ',
+    contactRole: 'Mas’ul vakil',
+    phone: initialPhone || '+998 ',
     email: '',
-    website: 'https://kokandtextile.uz',
-    employeeCount: '450+ nafar',
-    description: 'Qo‘qon shahrining yetakchi to‘qimachilik va tayyor kiyim-kechak fabrikasi. Talaba qizlar va yosh mutaxassislar uchun qulay darsdan keyingi smenalar, bepul xizmat avtobusi, issiq ovqat va to‘liq videokuzatuv tizimi yaratilgan.',
+    website: '',
+    employeeCount: '',
+    description: '',
     eveningTransportSupported: true,
     cctvEquipped: true,
     formalContractGuaranteed: true,
-    femaleStaffRatio: '88%',
+    femaleStaffRatio: '70%',
     permitFile: null as { name: string; size: string; uploadDate: string; type?: string } | null,
     password: '',
     passwordConfirm: ''
   });
 
   // Sign In Form Fields
-  const [loginPhone, setLoginPhone] = useState('+998 73 542 12 34');
-  const [loginPassword, setLoginPassword] = useState('textile123');
+  const [loginPhone, setLoginPhone] = useState('');
+  const [loginPassword, setLoginPassword] = useState('');
 
   if (!isOpen) return null;
 
@@ -144,17 +144,18 @@ export const AuthModal: React.FC<AuthModalProps> = ({
     }] : [];
 
     const profile: JobSeekerProfile = {
-      fullName: seekerForm.fullName || 'Dilnoza Karimova',
+      fullName: seekerForm.fullName.trim() || 'Foydalanuvchi',
       phone: seekerForm.phone,
-      email: seekerForm.email || 'dilnoza.karimova@edu.uz',
+      email: seekerForm.email.trim(),
       birthDate: seekerForm.birthDate,
       gender: seekerForm.gender,
       university: seekerForm.university,
-      faculty: seekerForm.faculty,
+      faculty: '',
       courseYear: seekerForm.courseYear,
       studyType: seekerForm.studyType,
       district: seekerForm.district,
-      desiredPosition: seekerForm.desiredPosition,
+      soha: seekerForm.soha.trim(),
+      mutaxassislik: seekerForm.mutaxassislik.trim() || 'Talaba / Mutaxassis',
       expectedSalary: seekerForm.expectedSalary,
       preferredDays: seekerForm.preferredDays,
       workingTimeOfDay: seekerForm.workingTimeOfDay,
@@ -162,9 +163,9 @@ export const AuthModal: React.FC<AuthModalProps> = ({
       workingHoursEnd: seekerForm.workingHoursEnd,
       preferredHours: `${seekerForm.workingTimeOfDay || 'Tushdan so‘ng'} (${seekerForm.workingHoursStart} – ${seekerForm.workingHoursEnd})`,
       freeHours: `${seekerForm.workingHoursStart} – ${seekerForm.workingHoursEnd} (${seekerForm.preferredDays.join(', ')})`,
-      languages: seekerForm.languages.split(',').map(l => l.trim()),
-      skills: skillsList.length ? skillsList : ['Tikuv mashinalari bilan ishlash', 'Lekalo', 'Kompyuter savodxonligi'],
-      interests: ['To‘qimachilik sanoati', 'Kiyim dizayni', 'Xorijiy tillar'],
+      languages: seekerForm.languages ? seekerForm.languages.split(',').map(l => l.trim()) : ['O‘zbek tili'],
+      skills: skillsList.length ? skillsList : ['Mas’uliyatlilik', 'Muloqot madaniyati'],
+      interests: ['Xalol mehnat', 'O‘rganish'],
       experience: seekerForm.experience,
       bio: seekerForm.bio,
       safetyPreferences: {
@@ -181,7 +182,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
       id: `acc-seeker-${Date.now()}`,
       role: 'job_seeker',
       phone: seekerForm.phone,
-      password: seekerForm.password || 'pass123',
+      password: seekerForm.password || '123456',
       name: profile.fullName,
       profileData: profile,
       certificates: parsedCertificates,
@@ -198,16 +199,16 @@ export const AuthModal: React.FC<AuthModalProps> = ({
     e.preventDefault();
 
     const profile: EmployerProfile = {
-      companyName: employerForm.companyName || 'Kokand Textile Fabrikasi MCHJ',
-      inn: employerForm.inn || '305 482 910',
+      companyName: employerForm.companyName.trim() || 'Tashkilot',
+      inn: employerForm.inn.trim(),
       legalType: employerForm.legalType,
       category: employerForm.category,
       address: employerForm.address,
       landmark: employerForm.landmark,
-      contactPerson: employerForm.contactPerson || 'Nargiza Yo‘ldosheva',
+      contactPerson: employerForm.contactPerson.trim(),
       contactRole: employerForm.contactRole,
       phone: employerForm.phone,
-      email: employerForm.email || 'hr@kokandtextile.uz',
+      email: employerForm.email.trim(),
       website: employerForm.website,
       employeeCount: employerForm.employeeCount,
       description: employerForm.description,
@@ -225,7 +226,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
       id: `acc-employer-${Date.now()}`,
       role: 'employer',
       phone: employerForm.phone,
-      password: employerForm.password || 'textile123',
+      password: employerForm.password || '123456',
       name: profile.companyName,
       profileData: profile,
       permitFile: employerForm.permitFile || undefined,
@@ -252,70 +253,6 @@ export const AuthModal: React.FC<AuthModalProps> = ({
     } else {
       setSignInError(authResult.error || 'Kiritilgan telefon raqami yoki parol noto‘g‘ri!');
     }
-  };
-
-  // Quick preset fills for fast testing
-  const fillSeekerDemo = () => {
-    setSeekerForm({
-      fullName: 'Dilnoza Karimova',
-      phone: '+998 90 123 45 67',
-      email: 'dilnoza.karimova@edu.uz',
-      birthDate: '2004-05-14',
-      gender: 'Ayol',
-      university: 'Kokand University',
-      faculty: 'Dizayn, to‘qimachilik va amaliy san’at',
-      courseYear: '3-kurs talabasi',
-      studyType: 'Kunduzgi',
-      district: 'Qo‘qon shahri, Shoxruxobod mavzesi',
-      desiredPosition: 'Tekstil konstruktori / Tikuvchilik amaliyoti',
-      expectedSalary: '4 000 000 so‘m',
-      preferredHours: 'Part-time (14:30 dan so‘ng)',
-      freeHours: '14:30 – 19:00',
-      languages: 'O‘zbek tili (Ona tili), Rus tili (Erkin), Ingliz tili (IELTS 7.0)',
-      skills: 'Tikuv mashinalari bilan ishlash, Lekalo va bichish, Kompyuter savodxonligi, Jamoada ishlash',
-      experience: '1 yillik tikuvchilik va modellashtirish amaliyoti',
-      bio: 'Kokand University talabasiman. Tikuvchilik va kiyim-kechak ishlab chiqarish sohasida bilim va amaliy ko‘nikmaga egaman. Darsdan so‘ng xavfsiz to‘qimachilik fabrikasida ishlashni xohlayman.',
-      cctvRequired: true,
-      transportRequired: true,
-      femaleStaffOnly: false,
-      certificatesText: 'Tikuvchilik va modellashtirish mutaxassisligi (Qo‘qon Kasb-hunar markazi)',
-      recommendationsText: 'Prof. Xursheda Rahimova (Kokand University dekan muovini)',
-      certFileName: 'tikuvchilik_mutaxassislik_sertifikati.pdf',
-      recFileName: 'dekanat_tavsiyanomasi.pdf',
-      password: 'pass123',
-      passwordConfirm: 'pass123'
-    });
-  };
-
-  const fillEmployerDemo = () => {
-    setEmployerForm({
-      companyName: 'Kokand Textile Fabrikasi MCHJ',
-      inn: '305 482 910',
-      legalType: 'MCHJ (To‘qimachilik qo‘shma korxonasi)',
-      category: 'To‘qimachilik va Tikuvchilik (Textile Fabrikasi)',
-      address: 'Qo‘qon shahri, Yangi Chorsu ko‘chasi 18-uy (Sanoat hududi)',
-      landmark: 'Qo‘qon Erkin Iqtisodiy Zonasi, 2-sanoat zonasi',
-      contactPerson: 'Nargiza Yo‘ldosheva',
-      contactRole: 'Kadrlar bo‘limi boshlig‘i va HR direktori',
-      phone: '+998 73 542 12 34',
-      email: 'hr@kokandtextile.uz',
-      website: 'https://kokandtextile.uz',
-      employeeCount: '450+ nafar (88% xotin-qizlar)',
-      description: 'Qo‘qon shahrining yetakchi to‘qimachilik va tayyor kiyim-kechak fabrikasi. Talaba qizlar va yosh mutaxassislar uchun qulay darsdan keyingi smenalar, bepul xizmat avtobusi, issiq ovqat va to‘liq videokuzatuv tizimi yaratilgan.',
-      eveningTransportSupported: true,
-      cctvEquipped: true,
-      formalContractGuaranteed: true,
-      femaleStaffRatio: '88%',
-      permitFile: {
-        name: 'davlat_ruxsatnomasi_kokand_textile_2026.pdf',
-        size: '2.4 MB',
-        uploadDate: '2026-yil 12-fevral',
-        type: 'application/pdf'
-      },
-      password: 'textile123',
-      passwordConfirm: 'textile123'
-    });
-    setEmployerPermitError('');
   };
 
   return (
@@ -420,7 +357,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                   </div>
                 </div>
 
-                {/* Profile 2: Xodim qidiruvchi (E'lon beruvchi) */}
+                {/* Profile 2: Ish beruvchi */}
                 <div
                   onClick={() => setSelectedRole('employer')}
                   className={`p-4 rounded-2xl border-2 transition-all cursor-pointer flex items-start gap-3.5 ${
@@ -436,7 +373,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                   <div className="flex-1">
                     <div className="flex items-center justify-between">
                       <h3 className="text-sm font-bold text-stone-900 leading-tight">
-                        Xodim qidiruvchi (E'lon beruvchi)
+                        Ish beruvchi
                       </h3>
                       <div className={`w-4.5 h-4.5 rounded-full border-2 flex items-center justify-center ${
                         selectedRole === 'employer'
@@ -447,10 +384,10 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                       </div>
                     </div>
                     <p className="text-xs text-stone-600 mt-1">
-                      Kompaniyalar, o‘quv markazlari, maktablar, xavfsiz vakansiya joylashtiruvchi ish beruvchilar
+                      Kompaniyalar, o‘quv markazlari, maktablar, xavfsiz vakansiya joylashtiruvchi tashkilotlar
                     </p>
                     <div className="flex flex-wrap gap-1 mt-2">
-                      <span className="text-[10px] font-medium px-2 py-0.5 rounded bg-emerald-100/70 text-emerald-800">Vakansiya berish</span>
+                      <span className="text-[10px] font-medium px-2 py-0.5 rounded bg-emerald-100/70 text-emerald-800">E'lon berish</span>
                       <span className="text-[10px] font-medium px-2 py-0.5 rounded bg-emerald-100/70 text-emerald-800">STIR audit</span>
                       <span className="text-[10px] font-medium px-2 py-0.5 rounded bg-emerald-100/70 text-emerald-800">Nomzodlar arizasi</span>
                     </div>
@@ -492,22 +429,13 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           {/* ============================================================= */}
           {mode === 'register_details' && selectedRole === 'job_seeker' && (
             <div className="space-y-4">
-              <div className="flex items-center justify-between pb-3 border-b border-stone-100">
-                <div>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#0066FF] bg-blue-50 px-2.5 py-0.5 rounded">
-                    Ish qidiruvchi (E'lon qidiruvchi)
-                  </span>
-                  <h2 className="text-base font-bold text-stone-900 mt-1">
-                    Talaba va rezyume ma’lumotlarini to‘ldirish
-                  </h2>
-                </div>
-                <button
-                  type="button"
-                  onClick={fillSeekerDemo}
-                  className="text-[11px] font-bold text-[#0066FF] hover:underline cursor-pointer bg-blue-50 px-2.5 py-1 rounded-md border border-blue-200/60"
-                >
-                  Namunani to‘ldirish ⚡
-                </button>
+              <div className="pb-3 border-b border-stone-100">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-[#0066FF] bg-blue-50 px-2.5 py-0.5 rounded">
+                  Ish izlovchi profili
+                </span>
+                <h2 className="text-base font-bold text-stone-900 mt-1">
+                  Rezyume va shaxsiy ma’lumotlarni to‘ldirish
+                </h2>
               </div>
 
               {/* Progress Steps */}
@@ -641,20 +569,8 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                       </select>
                     </div>
 
-                    {/* Fakultet, Kurs va Ta'lim shakli */}
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
-                      <div className="sm:col-span-1">
-                        <label className="block font-semibold text-stone-700 mb-1">
-                          Fakultet / Yo‘nalish
-                        </label>
-                        <input
-                          type="text"
-                          value={seekerForm.faculty}
-                          onChange={(e) => setSeekerForm({ ...seekerForm, faculty: e.target.value })}
-                          placeholder="Ingliz tili filologiyasi"
-                          className="w-full h-9.5 px-3 rounded-lg border border-stone-300 text-stone-900 focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
-                        />
-                      </div>
+                    {/* Kurs va Ta'lim shakli */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                       <div>
                         <label className="block font-semibold text-stone-700 mb-1">
                           Kursi
@@ -688,6 +604,48 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                       </div>
                     </div>
 
+                    {/* Soha va Mutaxassislik (Ish beruvchiga taqdim etiladi) */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 p-3 bg-blue-50/60 rounded-xl border border-blue-200">
+                      <div>
+                        <label className="block font-bold text-stone-800 mb-1">
+                          Soha (Qaysi sohada ishlamoqchisiz?) *
+                        </label>
+                        <select
+                          value={seekerForm.soha}
+                          onChange={(e) => setSeekerForm({ ...seekerForm, soha: e.target.value })}
+                          className="w-full h-9.5 px-2.5 rounded-lg border border-stone-300 bg-white text-stone-900 font-medium"
+                        >
+                          <option value="Ta’lim va repetitorlik">Ta’lim va repetitorlik</option>
+                          <option value="Axborot texnologiyalari (IT / Dasturlash)">Axborot texnologiyalari (IT)</option>
+                          <option value="Savdo va xizmat ko‘rsatish">Savdo va mijozlar xizmati</option>
+                          <option value="Ma’muriyat va ofis ishlari">Ma’muriyat va ofis (Admin)</option>
+                          <option value="Marketing, SMM va Reklama">Marketing va SMM</option>
+                          <option value="Grafik dizayn va Media">Dizayn va Media</option>
+                          <option value="Mehmonxona va Umumiy ovqatlanish">Umumiy ovqatlanish va Kafe</option>
+                          <option value="Moliya va Buxgalteriya">Moliya va Buxgalteriya</option>
+                          <option value="Tarjimonlik va Tillar">Tarjimonlik va Tillar</option>
+                          <option value="Boshqa soha">Boshqa soha</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label className="block font-bold text-stone-800 mb-1">
+                          Mutaxassislik / Kasbingiz *
+                        </label>
+                        <input
+                          type="text"
+                          required
+                          value={seekerForm.mutaxassislik}
+                          onChange={(e) => setSeekerForm({ ...seekerForm, mutaxassislik: e.target.value })}
+                          placeholder="Masalan: Ingliz tili repetitori, Kassir, SMM..."
+                          className="w-full h-9.5 px-3 rounded-lg border border-stone-300 bg-white text-stone-900 font-medium focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
+                        />
+                      </div>
+                      <div className="sm:col-span-2 text-[10.5px] text-blue-800 font-medium flex items-center gap-1">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-blue-600 shrink-0" />
+                        <span>Soha va mutaxassisligingiz ish beruvchiga rezyume sifatida taqdim etiladi.</span>
+                      </div>
+                    </div>
+
                     <button
                       type="button"
                       onClick={() => setRegisterStep(2)}
@@ -701,33 +659,18 @@ export const AuthModal: React.FC<AuthModalProps> = ({
 
                 {registerStep === 2 && (
                   <div className="space-y-3">
-                    {/* Qidirayotgan lavozimi va Maosh */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                      <div>
-                        <label className="block font-semibold text-stone-700 mb-1">
-                          Qidirayotgan lavozim / Sohasi *
-                        </label>
-                        <input
-                          type="text"
-                          required
-                          value={seekerForm.desiredPosition}
-                          onChange={(e) => setSeekerForm({ ...seekerForm, desiredPosition: e.target.value })}
-                          placeholder="Ingliz tili repetitori, Administrator..."
-                          className="w-full h-9.5 px-3 rounded-lg border border-stone-300 text-stone-900 focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
-                        />
-                      </div>
-                      <div>
-                        <label className="block font-semibold text-stone-700 mb-1">
-                          Kutilayotgan oylik maosh
-                        </label>
-                        <input
-                          type="text"
-                          value={seekerForm.expectedSalary}
-                          onChange={(e) => setSeekerForm({ ...seekerForm, expectedSalary: e.target.value })}
-                          placeholder="3 000 000 – 5 000 000 so‘m"
-                          className="w-full h-9.5 px-3 rounded-lg border border-stone-300 text-stone-900 focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
-                        />
-                      </div>
+                    {/* Kutilayotgan maosh */}
+                    <div>
+                      <label className="block font-semibold text-stone-700 mb-1">
+                        Kutilayotgan oylik maosh (Ixtiyoriy)
+                      </label>
+                      <input
+                        type="text"
+                        value={seekerForm.expectedSalary}
+                        onChange={(e) => setSeekerForm({ ...seekerForm, expectedSalary: e.target.value })}
+                        placeholder="Masalan: 3 000 000 – 5 000 000 so‘m"
+                        className="w-full h-9.5 px-3 rounded-lg border border-stone-300 text-stone-900 focus:outline-none focus:ring-2 focus:ring-[#0066FF]"
+                      />
                     </div>
 
                     {/* Qulay ish kunlari, kun vaqti va soatlari */}
@@ -923,12 +866,12 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                       </label>
                     </div>
 
-                    {/* Mutaxassislik sertifikatlari va Tavsiyanomalar (Ixtiyoriy) */}
+                    {/* Sertifikatlar va Tavsiyanomalar (Ixtiyoriy) */}
                     <div className="p-3 bg-stone-50 rounded-xl border border-stone-200 space-y-2.5">
                       <div className="flex items-center justify-between">
                         <span className="font-bold text-stone-800 text-[11px] uppercase tracking-wider flex items-center gap-1.5">
                           <Award className="w-3.5 h-3.5 text-[#802244]" />
-                          <span>Mutaxassislik sertifikatlari & Tavsiyanomalar</span>
+                          <span>Sertifikatlar & Tavsiyanomalar</span>
                         </span>
                         <span className="text-[10px] text-stone-500 font-semibold bg-stone-200/70 px-2 py-0.5 rounded">
                           Ixtiyoriy
@@ -937,13 +880,13 @@ export const AuthModal: React.FC<AuthModalProps> = ({
 
                       <div>
                         <label className="block font-semibold text-stone-700 mb-1">
-                          Mutaxassislik sertifikati (Yo‘nalish, tashkilot nomi)
+                          Sertifikat (nomi va tashkilot)
                         </label>
                         <input
                           type="text"
                           value={seekerForm.certificatesText}
                           onChange={(e) => setSeekerForm({ ...seekerForm, certificatesText: e.target.value })}
-                          placeholder="Masalan: Tikuvchilik-modellash sertifikati, IELTS 7.0, IT/Grafika..."
+                          placeholder="Masalan: IELTS 7.0, IT Savodxonlik, Tikuvchilik kursi..."
                           className="w-full h-9 px-3 rounded-lg border border-stone-300 text-stone-900 focus:outline-none focus:ring-2 focus:ring-[#802244]"
                         />
                       </div>
@@ -1018,22 +961,13 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           {/* ============================================================= */}
           {mode === 'register_details' && selectedRole === 'employer' && (
             <div className="space-y-4">
-              <div className="flex items-center justify-between pb-3 border-b border-stone-100">
-                <div>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded">
-                    Xodim qidiruvchi (E'lon beruvchi)
-                  </span>
-                  <h2 className="text-base font-bold text-stone-900 mt-1">
-                    Tashkilot va vakansiya beruvchi ma’lumotlari
-                  </h2>
-                </div>
-                <button
-                  type="button"
-                  onClick={fillEmployerDemo}
-                  className="text-[11px] font-bold text-emerald-700 hover:underline cursor-pointer bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200/60"
-                >
-                  Namunani to‘ldirish ⚡
-                </button>
+              <div className="pb-3 border-b border-stone-100">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded">
+                  Ish beruvchi profili
+                </span>
+                <h2 className="text-base font-bold text-stone-900 mt-1">
+                  Tashkilot va vakansiya beruvchi ma’lumotlari
+                </h2>
               </div>
 
               {/* Progress Steps */}
@@ -1333,12 +1267,12 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                       />
                     </div>
 
-                    {/* HerPath Xavfsizlik Kafolatlari (Standart talablar) */}
+                    {/* Soatbay Xavfsizlik Kafolatlari (Standart talablar) */}
                     <div className="p-3 bg-stone-50 rounded-xl border border-stone-200 space-y-2">
                       <div className="flex items-center justify-between">
                         <span className="font-bold text-stone-800 text-[11px] uppercase tracking-wider flex items-center gap-1.5">
                           <ShieldCheck className="w-3.5 h-3.5 text-emerald-700" />
-                          <span>HerPath Ish Beruvchi Xavfsizlik Kafolatlari</span>
+                          <span>Soatbay Ish Beruvchi Xavfsizlik Kafolatlari</span>
                         </span>
                         <span className="text-[10px] text-emerald-800 font-bold bg-emerald-100 px-2 py-0.5 rounded">
                           Majburiy
@@ -1472,7 +1406,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                   }`}
                 >
                   <Building2 className="w-3.5 h-3.5" />
-                  <span>Xodim qidiruvchi</span>
+                  <span>Ish beruvchi</span>
                 </button>
               </div>
 

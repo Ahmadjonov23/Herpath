@@ -22,7 +22,7 @@ export const VerificationModal: React.FC<VerificationModalProps> = ({ job, isOpe
             </div>
             <div>
               <h2 className="text-sm font-bold text-stone-900 leading-tight">
-                HerPath Tekshiruv Sertifikati
+                Soatbay Tekshiruv Sertifikati
               </h2>
               <p className="text-[11px] text-stone-500">
                 Ish beruvchi xavfsizligi va ishonchliligi auditi
@@ -47,7 +47,7 @@ export const VerificationModal: React.FC<VerificationModalProps> = ({ job, isOpe
                 Tasdiqlangan va tekshirilgan ish beruvchi
               </div>
               <p className="text-[11px] text-emerald-800 mt-0.5 leading-relaxed">
-                Ushbu korxona HerPath platformasining qizlar va talabalar uchun mo‘ljallangan xavfsizlik standartlariga javob beradi.
+                Ushbu korxona Soatbay platformasining talabalar va yoshlar uchun mo‘ljallangan xavfsizlik standartlariga javob beradi.
               </p>
             </div>
           </div>

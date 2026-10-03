@@ -3,13 +3,14 @@ import { TabType, UserRole } from '../types';
 import { BrandLogo } from './BrandLogo';
 import {
   User, Bookmark, Briefcase, ChevronDown, MapPin, Send, HelpCircle,
-  LogOut, Globe, Check
+  LogOut, Globe, Check, Bell
 } from 'lucide-react';
 
 interface NavbarProps {
   currentTab: TabType;
   onSelectTab: (tab: TabType) => void;
   savedCount: number;
+  unreadNotificationsCount?: number;
   userName: string;
   userRole: UserRole;
   isLoggedIn: boolean;
@@ -22,6 +23,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   currentTab,
   onSelectTab,
   savedCount,
+  unreadNotificationsCount = 0,
   userName,
   userRole,
   isLoggedIn,
@@ -37,7 +39,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-14 sm:h-15 flex items-center justify-between gap-3">
         {/* Left Side: Brand Logo + Help Link */}
         <div className="flex items-center gap-3 sm:gap-5">
-          {/* HerPath Platform Logo */}
+          {/* Soatbay Platform Logo */}
           <BrandLogo
             size="md"
             onClick={() => onSelectTab('home')}
@@ -137,6 +139,24 @@ export const Navbar: React.FC<NavbarProps> = ({
                   )}
                 </button>
               )}
+
+              {/* Notifications Button */}
+              <button
+                type="button"
+                onClick={() => onSelectTab(userRole === 'employer' ? 'employer' : 'notifications')}
+                className={`w-9 h-9 rounded-full border text-stone-600 hover:text-stone-900 hover:bg-stone-50 flex items-center justify-center relative transition-colors cursor-pointer ${
+                  currentTab === 'notifications' ? 'border-stone-900 text-stone-900 bg-stone-50' : 'border-stone-200'
+                }`}
+                title="Bildirishnomalar va xabarlar"
+                aria-label="Bildirishnomalar"
+              >
+                <Bell className="w-4 h-4" />
+                {unreadNotificationsCount > 0 && (
+                  <span className="absolute -top-1 -right-1 min-w-[16px] h-4 px-1 rounded-full bg-emerald-600 text-white text-[9px] font-bold flex items-center justify-center animate-pulse">
+                    {unreadNotificationsCount}
+                  </span>
+                )}
+              </button>
 
               {/* User Avatar with Profile Tab navigation */}
               <button

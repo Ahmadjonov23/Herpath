@@ -5,6 +5,7 @@ import {
   Building2, Users, Briefcase, GraduationCap, ChevronRight,
   Sparkles, Smartphone, Download, Star, Clock, Lock, Award
 } from 'lucide-react';
+import { SoatbayLogoIcon } from './SoatbayLogoIcon';
 
 interface LandingPageViewProps {
   jobs?: Job[];
@@ -131,27 +132,15 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
                     </span>
                   </div>
 
-                  {/* Markaziy badiiy qiz/xodim vektor kompozitsiyasi */}
+                  {/* Markaziy rasmiy Soatbay logosi (shaffof fonli ayol silueti va kasb-hunar ramzlari) */}
                   <div className="flex items-center justify-center py-2">
                     <div className="relative">
                       {/* Aura glow */}
-                      <div className="absolute inset-0 bg-rose-400/25 blur-xl rounded-full" />
+                      <div className="absolute inset-0 bg-purple-500/30 blur-2xl rounded-full" />
                       
-                      {/* Vektor qahramon emblemasi */}
-                      <div className="relative w-24 h-24 rounded-2xl bg-white/10 border border-white/25 backdrop-blur-md flex items-center justify-center text-white shadow-xl">
-                        <svg className="w-14 h-14" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          {/* Girl profile with graduation cap & modern workplace headset/laptop */}
-                          <circle cx="32" cy="22" r="12" fill="#FCE7F3" />
-                          <path d="M22 20C22 14.4772 26.4772 10 32 10C37.5228 10 42 14.4772 42 20C42 21.5 41.5 24 40 25.5C38.5 27 34 29 32 29C30 29 25.5 27 24 25.5C22.5 24 22 21.5 22 20Z" fill="#802244" />
-                          {/* Modern smart glasses / headset accent */}
-                          <path d="M24 21C26 21 28 22 30 22C32 22 34 21 36 21" stroke="#F59E0B" strokeWidth="2" strokeLinecap="round" />
-                          {/* Torso in professional blazer */}
-                          <path d="M14 52C14 41 22 36 32 36C42 36 50 41 50 52V54H14V52Z" fill="#91244C" />
-                          <path d="M32 36L27 48L32 54L37 48L32 36Z" fill="#FCE7F3" />
-                          {/* Laptop representation in hands */}
-                          <rect x="20" y="46" width="24" height="12" rx="2" fill="#1E293B" stroke="#60A5FA" strokeWidth="1.5" />
-                          <line x1="28" y1="52" x2="36" y2="52" stroke="#60A5FA" strokeWidth="1.5" strokeLinecap="round" />
-                        </svg>
+                      {/* Vektor qahramon rasmiy logosi */}
+                      <div className="relative w-28 h-28 rounded-2xl bg-white/10 border border-white/25 backdrop-blur-md flex items-center justify-center text-white shadow-2xl p-2">
+                        <SoatbayLogoIcon size={84} inverted={true} className="drop-shadow-md" />
                       </div>
                     </div>
                   </div>
@@ -389,7 +378,7 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
         <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-stone-900 to-stone-800 text-white border border-stone-800 flex flex-col justify-between space-y-4">
           <div className="space-y-2">
             <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-400 bg-emerald-950/80 border border-emerald-800 px-2.5 py-0.5 rounded-md">
-              Xodim qidiruvchilar uchun
+              Ish beruvchilar uchun
             </span>
             <h3 className="text-xl font-bold text-white tracking-tight">
               Iqtidorli talabalarni ishga oling

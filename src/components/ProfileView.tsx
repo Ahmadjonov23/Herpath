@@ -5,7 +5,7 @@ import {
   DollarSign, Sparkles, BookOpen, Save, X, Plus, FileText, Trash2, Paperclip,
   Check, UploadCloud
 } from 'lucide-react';
-import { JobSeekerProfile } from '../types';
+import { JobSeekerProfile, Application, AppNotification } from '../types';
 
 interface ProfileViewProps {
   onNavigateToMap: () => void;
@@ -13,6 +13,8 @@ interface ProfileViewProps {
   onLogout: () => void;
   profileData?: JobSeekerProfile;
   onUpdateProfile?: (updated: JobSeekerProfile) => void;
+  applications?: Application[];
+  notifications?: AppNotification[];
 }
 
 export const ProfileView: React.FC<ProfileViewProps> = ({
@@ -20,7 +22,9 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
   onReplayOnboarding,
   onLogout,
   profileData,
-  onUpdateProfile
+  onUpdateProfile,
+  applications = [],
+  notifications = []
 }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [showAddCertModal, setShowAddCertModal] = useState(false);
@@ -45,61 +49,35 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
   });
 
   const [profile, setProfile] = useState<JobSeekerProfile>({
-    fullName: profileData?.fullName || 'Dilnoza Karimova',
-    phone: profileData?.phone || '+998 90 123 45 67',
-    email: profileData?.email || 'dilnoza.karimova@edu.uz',
-    birthDate: profileData?.birthDate || '2004-05-14',
+    fullName: profileData?.fullName || 'Talaba',
+    phone: profileData?.phone || '+998 ',
+    email: profileData?.email || '',
+    birthDate: profileData?.birthDate || '',
     gender: profileData?.gender || 'Ayol',
     university: profileData?.university || 'Kokand University',
-    faculty: profileData?.faculty || 'Dizayn, to‘qimachilik va amaliy san’at',
-    courseYear: profileData?.courseYear || '3-kurs talabasi',
+    faculty: '',
+    courseYear: profileData?.courseYear || '1-kurs talabasi',
     studyType: profileData?.studyType || 'Kunduzgi',
-    district: profileData?.district || 'Qo‘qon shahri, Shoxruxobod mavzesi',
-    desiredPosition: profileData?.desiredPosition || 'Tekstil konstruktori / Tikuvchilik ustasi yordamchisi',
-    expectedSalary: profileData?.expectedSalary || '3 500 000 – 5 000 000 so‘m',
-    preferredHours: profileData?.preferredHours || 'Part-time (14:30 dan so‘ng)',
-    freeHours: profileData?.freeHours || '14:30 – 19:00 (Dushanba-Juma)',
+    district: profileData?.district || 'Qo‘qon shahri',
+    expectedSalary: profileData?.expectedSalary || '',
+    preferredHours: profileData?.preferredHours || 'Part-time',
+    freeHours: profileData?.freeHours || '',
     preferredDays: profileData?.preferredDays || ['Dushanba', 'Seshanba', 'Chorshanba', 'Payshanba', 'Juma'],
-    workingTimeOfDay: profileData?.workingTimeOfDay || 'Tushdan so‘ng (Part-time / Darsdan keyin)',
+    workingTimeOfDay: profileData?.workingTimeOfDay || 'Tushdan so‘ng (Part-time)',
     workingHoursStart: profileData?.workingHoursStart || '14:30',
-    workingHoursEnd: profileData?.workingHoursEnd || '19:00',
-    languages: profileData?.languages || ['O‘zbek tili (Ona tili)', 'Rus tili (Erkin)', 'Ingliz tili (IELTS 7.0)'],
-    skills: profileData?.skills || ['Tikuv mashinalari bilan ishlash', 'Lekalo va bichish', 'Kompyuter savodxonligi', 'Figma', 'Jamoada ishlash'],
-    interests: profileData?.interests || ['To‘qimachilik sanoati', 'Kiyim dizayni', 'Xorijiy tillar', 'Trikotaj fabrikasi'],
-    experience: profileData?.experience || '1 yillik tikuvchilik va modellashtirish amaliyoti',
-    bio: profileData?.bio || 'Kokand University talabasiman. Tikuvchilik va kiyim-kechak ishlab chiqarish sohasida bilim va amaliy ko‘nikmaga egaman. Darsdan so‘ng xavfsiz to‘qimachilik fabrikasida ishlashni xohlayman.',
+    workingHoursEnd: profileData?.workingHoursEnd || '18:30',
+    languages: profileData?.languages || ['O‘zbek tili'],
+    skills: profileData?.skills || ['Mas’uliyatlilik', 'Muloqot madaniyati'],
+    interests: profileData?.interests || ['Ta’lim', 'Mehnat'],
+    experience: profileData?.experience || '',
+    bio: profileData?.bio || '',
     safetyPreferences: profileData?.safetyPreferences || {
       cctvRequired: true,
       transportRequired: true,
       femaleStaffOnly: false
     },
-    certificates: profileData?.certificates || [
-      {
-        id: 'cert-1',
-        title: 'Tikuvchilik-modellash va trikotaj mahsulotlari texnologi',
-        issuer: 'Qo‘qon Hunarmandchilik va Kasbiy Ta’lim Markazi',
-        date: '2025-yil',
-        fileName: 'tikuvchilik_mutaxassislik_sertifikati.pdf'
-      },
-      {
-        id: 'cert-2',
-        title: 'Ingliz tili IELTS 7.0 Xalqaro sertifikati',
-        issuer: 'British Council Uzbekistan',
-        date: '2025-yil',
-        fileName: 'ielts_certificate_dilnoza.pdf'
-      }
-    ],
-    recommendations: profileData?.recommendations || [
-      {
-        id: 'rec-1',
-        recommenderName: 'Prof. Xursheda Rahimova',
-        organization: 'Kokand University',
-        role: 'Fakultet dekani o‘rinbosari',
-        phone: '+998 91 234 56 78',
-        text: 'Dilnoza Karimova intiluvchan, darslarda namunali va o‘z mutaxassisligini chuqur o‘rganayotgan iqtidorli talaba. Jamoada halol va mas’uliyatli faoliyat yuritishiga to‘liq kafolat beraman.',
-        fileName: 'dekanat_tavsiyanomasi.pdf'
-      }
-    ]
+    certificates: profileData?.certificates || [],
+    recommendations: profileData?.recommendations || []
   });
 
   useEffect(() => {
@@ -175,7 +153,7 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
       organization: recForm.organization.trim() || 'Kokand University',
       role: recForm.role.trim() || 'Ustoz / Dekan',
       phone: recForm.phone.trim(),
-      text: recForm.text.trim() || 'Nomzod tirishqoq, xushmuomala va o‘z kasbiga mas’uliyatli mutaxassis.',
+      text: recForm.text.trim() || 'Nomzod tirishqoq, xushmuomala va o‘z ishiga mas’uliyatli.',
       fileName: recForm.fileName || 'tavsiyanoma_xati.pdf'
     };
 
@@ -224,7 +202,7 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
               </div>
               <p className="text-xs text-stone-600 mt-1 flex items-center gap-1.5 flex-wrap">
                 <GraduationCap className="w-4 h-4 text-[#802244] shrink-0" />
-                <span>{profile.university} · {profile.faculty}</span>
+                <span>{profile.university}</span>
               </p>
               <span className="text-xs text-stone-400 mt-0.5 block">
                 {profile.courseYear} · {profile.studyType || 'Kunduzgi ta’lim'}
@@ -257,7 +235,7 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
         <div className="mt-4 p-3.5 rounded-xl bg-stone-50 border border-stone-200">
           <div className="flex items-center justify-between text-xs mb-1.5">
             <span className="font-semibold text-stone-800">
-              Profil to‘liqligi va mutaxassislik ko‘rsatkichi
+              Profil to‘liqligi ko‘rsatkichi
             </span>
             <span className="font-mono font-bold text-[#802244]">
               96%
@@ -272,7 +250,7 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
           </div>
 
           <p className="text-[11px] text-stone-500 mt-2">
-            Talabalik guvohnomasi, mutaxassislik sertifikatlari va tavsiyanomalar tizimda tekshirilgan.
+            Talabalik guvohnomasi, sertifikatlar va tavsiyanomalar tizimda tekshirilgan.
           </p>
         </div>
       </div>
@@ -338,22 +316,13 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <label className="block font-semibold text-stone-700 mb-1">Universitet (OTM)</label>
                 <input
                   type="text"
                   value={editForm.university}
                   onChange={(e) => setEditForm({ ...editForm, university: e.target.value })}
-                  className="w-full h-9.5 px-3 rounded-lg border border-stone-300 text-stone-900"
-                />
-              </div>
-              <div>
-                <label className="block font-semibold text-stone-700 mb-1">Fakultet / Yo‘nalish</label>
-                <input
-                  type="text"
-                  value={editForm.faculty}
-                  onChange={(e) => setEditForm({ ...editForm, faculty: e.target.value })}
                   className="w-full h-9.5 px-3 rounded-lg border border-stone-300 text-stone-900"
                 />
               </div>
@@ -368,25 +337,15 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div>
-                <label className="block font-semibold text-stone-700 mb-1">Qidirayotgan lavozim</label>
-                <input
-                  type="text"
-                  value={editForm.desiredPosition || ''}
-                  onChange={(e) => setEditForm({ ...editForm, desiredPosition: e.target.value })}
-                  className="w-full h-9.5 px-3 rounded-lg border border-stone-300 text-stone-900"
-                />
-              </div>
-              <div>
-                <label className="block font-semibold text-stone-700 mb-1">Kutilayotgan maosh</label>
-                <input
-                  type="text"
-                  value={editForm.expectedSalary || ''}
-                  onChange={(e) => setEditForm({ ...editForm, expectedSalary: e.target.value })}
-                  className="w-full h-9.5 px-3 rounded-lg border border-stone-300 text-stone-900"
-                />
-              </div>
+            <div>
+              <label className="block font-semibold text-stone-700 mb-1">Kutilayotgan maosh</label>
+              <input
+                type="text"
+                value={editForm.expectedSalary || ''}
+                onChange={(e) => setEditForm({ ...editForm, expectedSalary: e.target.value })}
+                placeholder="Masalan: 3 500 000 so‘m"
+                className="w-full h-9.5 px-3 rounded-lg border border-stone-300 text-stone-900"
+              />
             </div>
 
             {/* O‘zingiz ishlashni hohlagan kunlar, kun vaqti va soatlari */}
@@ -558,7 +517,7 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
       )}
 
       {/* ============================================================= */}
-      {/* MUTAXASSISLIK SERTIFIKATLARI & TAVSIYANOMALAR (IXTIYORIY)      */}
+      {/* SERTIFIKATLAR & TAVSIYANOMALAR (IXTIYORIY)                     */}
       {/* ============================================================= */}
       <div className="bg-white rounded-2xl border border-stone-200 p-5 shadow-xs space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-stone-100 gap-2">
@@ -566,14 +525,14 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
             <div className="flex items-center gap-2">
               <Award className="w-4 h-4 text-[#802244]" />
               <h2 className="text-sm font-bold text-stone-900 uppercase tracking-wider">
-                Mutaxassislik sertifikatlari & Tavsiyanomalar
+                Sertifikatlar & Tavsiyanomalar
               </h2>
               <span className="text-[10px] font-semibold text-stone-500 bg-stone-100 px-2 py-0.5 rounded">
                 Ixtiyoriy ravishda
               </span>
             </div>
             <p className="text-xs text-stone-500 mt-0.5">
-              Ish beruvchilar va tekstil/xizmat sohasi korxonalarida ustunlik beruvchi rasmiy hujjatlaringiz
+              Ish beruvchilar oldida ustunlik beruvchi qo‘shimcha hujjatlaringiz
             </p>
           </div>
 
@@ -595,16 +554,16 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
           </div>
         </div>
 
-        {/* 1. Mutaxassislik Sertifikatlari Ro'yxati */}
+        {/* 1. Sertifikatlar Ro'yxati */}
         <div className="space-y-2">
           <span className="text-xs font-bold text-stone-700 flex items-center gap-1.5">
             <Award className="w-3.5 h-3.5 text-[#802244]" />
-            <span>Mutaxassislik yo‘nalishidagi sertifikatlar ({(profile.certificates || []).length})</span>
+            <span>Sertifikatlar va kurslar ({(profile.certificates || []).length})</span>
           </span>
 
           {(profile.certificates || []).length === 0 ? (
             <div className="p-4 rounded-xl border border-dashed border-stone-200 text-center text-xs text-stone-500 bg-stone-50/50">
-              Hozircha sertifikat qo‘shilmagan. Yuqoridagi "Sertifikat qo‘shish" tugmasi orqali o‘z mutaxassisligingiz (to‘qimachilik, til, IT, dizayn) bo‘yicha sertifikatni kiritishingiz mumkin.
+              Hozircha sertifikat qo‘shilmagan. Yuqoridagi "Sertifikat qo‘shish" tugmasi orqali til, IT yoki boshqa kurs sertifikatlarini kiritishingiz mumkin.
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -784,6 +743,35 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
           </div>
         </div>
 
+        {/* Arizalar holati va ish beruvchi javoblari */}
+        {applications.length > 0 && (
+          <div className="bg-white rounded-2xl border border-stone-200 p-5 shadow-xs space-y-3">
+            <h2 className="text-xs font-bold text-stone-400 uppercase tracking-wider flex items-center gap-1.5">
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+              <span>Arizalarim holati ({applications.length})</span>
+            </h2>
+
+            <div className="space-y-2 text-xs">
+              {applications.slice(0, 4).map((app) => (
+                <div key={app.id} className="p-3 rounded-xl bg-stone-50 border border-stone-100 flex items-center justify-between gap-2">
+                  <div>
+                    <span className="font-bold text-stone-900 block">{app.jobTitle}</span>
+                    <span className="text-stone-500 text-[11px]">{app.company} · {app.appliedDate}</span>
+                  </div>
+                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                    app.status === 'accepted' ? 'bg-emerald-100 text-emerald-800' :
+                    app.status === 'interview' ? 'bg-blue-100 text-blue-800' :
+                    app.status === 'rejected' ? 'bg-rose-100 text-rose-800' :
+                    'bg-amber-100 text-amber-800'
+                  }`}>
+                    {app.statusLabelUz}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* Ish qidirish parametrlari & Kutilayotgan sharoitlar */}
         <div className="bg-white rounded-2xl border border-stone-200 p-5 shadow-xs space-y-3">
           <h2 className="text-xs font-bold text-stone-400 uppercase tracking-wider flex items-center gap-1.5">
@@ -793,12 +781,8 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
 
           <div className="space-y-2 text-xs">
             <div className="flex items-center justify-between p-2 rounded-lg bg-stone-50">
-              <span className="text-stone-500">Qidirayotgan lavozim:</span>
-              <span className="font-semibold text-stone-900">{profile.desiredPosition || 'Tekstil mutaxassisi / Tikuvchilik'}</span>
-            </div>
-            <div className="flex items-center justify-between p-2 rounded-lg bg-stone-50">
               <span className="text-stone-500">Kutilayotgan maosh:</span>
-              <span className="font-bold text-emerald-800 font-mono">{profile.expectedSalary || '4 000 000 so‘m'}</span>
+              <span className="font-bold text-emerald-800 font-mono">{profile.expectedSalary || 'Kelishilgan holda'}</span>
             </div>
             <div className="flex items-center justify-between p-2 rounded-lg bg-stone-50">
               <span className="text-stone-500">Darsdan bo‘sh soatlar:</span>
@@ -902,7 +886,7 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
               <div className="flex items-center gap-2">
                 <Award className="w-4 h-4 text-[#802244]" />
                 <h3 className="font-bold text-stone-900 text-sm">
-                  Mutaxassislik sertifikatini kiritish (Ixtiyoriy)
+                  Sertifikat ma’lumotlarini kiritish (Ixtiyoriy)
                 </h3>
               </div>
               <button
@@ -916,14 +900,14 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
             <form onSubmit={handleAddCertificate} className="p-5 space-y-3.5 text-xs">
               <div>
                 <label className="block font-semibold text-stone-700 mb-1">
-                  Sertifikat yo‘nalishi yoki nomi *
+                  Sertifikat yoki kurs nomi *
                 </label>
                 <input
                   type="text"
                   required
                   value={certForm.title}
                   onChange={(e) => setCertForm({ ...certForm, title: e.target.value })}
-                  placeholder="Masalan: Tikuvchilik-modellash mutaxassisi, IELTS 7.0, IT Dasturlash..."
+                  placeholder="Masalan: IELTS 7.0, Kompyuter savodxonligi, Tikuvchilik kursi..."
                   className="w-full h-9.5 px-3 rounded-lg border border-stone-300 text-stone-900 focus:outline-none focus:ring-2 focus:ring-[#802244]"
                 />
               </div>

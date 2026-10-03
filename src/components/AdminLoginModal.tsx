@@ -21,7 +21,7 @@ export const AdminLoginModal: React.FC<AdminLoginModalProps> = ({
   if (!isOpen) return null;
 
   const handleAutofill = () => {
-    setLogin('admin@herpath.uz');
+    setLogin('admin@soatbay.uz');
     setPassword('admin2026');
     setError(null);
   };
@@ -35,11 +35,11 @@ export const AdminLoginModal: React.FC<AdminLoginModalProps> = ({
       setIsLoading(false);
       // Valid credentials check
       const cleanLogin = login.trim().toLowerCase();
-      if ((cleanLogin === 'admin@herpath.uz' || cleanLogin === 'admin') && password === 'admin2026') {
+      if ((cleanLogin === 'admin@soatbay.uz' || cleanLogin === 'admin@herpath.uz' || cleanLogin === 'admin') && password === 'admin2026') {
         onLoginSuccess('Bosh Administrator');
         onClose();
       } else {
-        setError('Login yoki parol noto‘g‘ri. Administrator login: admin@herpath.uz, parol: admin2026');
+        setError('Login yoki parol noto‘g‘ri. Administrator login: admin@soatbay.uz, parol: admin2026');
       }
     }, 400);
   };
@@ -106,7 +106,7 @@ export const AdminLoginModal: React.FC<AdminLoginModalProps> = ({
             </div>
             <div className="font-mono text-[11px] bg-white p-2.5 rounded-lg border border-teal-100 flex items-center justify-between text-stone-700">
               <div className="space-y-0.5">
-                <div><strong className="text-stone-900">Login:</strong> <span className="text-teal-900 font-semibold select-all">admin@herpath.uz</span></div>
+                <div><strong className="text-stone-900">Login:</strong> <span className="text-teal-900 font-semibold select-all">admin@soatbay.uz</span></div>
                 <div><strong className="text-stone-900">Parol:</strong> <span className="text-teal-900 font-semibold select-all">admin2026</span></div>
               </div>
               <span className="text-[10px] text-teal-700 font-sans bg-teal-50 px-2 py-1 rounded border border-teal-200">
@@ -134,7 +134,7 @@ export const AdminLoginModal: React.FC<AdminLoginModalProps> = ({
                   required
                   value={login}
                   onChange={(e) => setLogin(e.target.value)}
-                  placeholder="admin@herpath.uz"
+                  placeholder="admin@soatbay.uz"
                   className="w-full h-10 pl-9 pr-3 rounded-lg border border-stone-300 bg-white text-xs font-medium text-stone-900 focus:outline-none focus:ring-2 focus:ring-[#0A192F]"
                 />
               </div>
@@ -175,7 +175,7 @@ export const AdminLoginModal: React.FC<AdminLoginModalProps> = ({
 
           <div className="pt-2 text-center">
             <span className="text-[11px] text-stone-400">
-              HerPath xavfsizlik auditi va platforma moderatsiya tizimi
+              Soatbay xavfsizlik auditi va platforma moderatsiya tizimi
             </span>
           </div>
         </div>

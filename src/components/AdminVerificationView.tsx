@@ -107,10 +107,10 @@ export const AdminVerificationView: React.FC<AdminVerificationViewProps> = ({
                 <span className="text-[10px] font-mono uppercase tracking-wider text-teal-300 font-bold bg-teal-900/60 px-2.5 py-0.5 rounded border border-teal-700">
                   SUPER ADMIN
                 </span>
-                <span className="text-xs text-stone-300 font-mono">admin@herpath.uz</span>
+                <span className="text-xs text-stone-300 font-mono">admin@soatbay.uz</span>
               </div>
               <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight mt-1">
-                HerPath Boshqaruv & Audit Konsoli
+                Soatbay Boshqaruv & Audit Konsoli
               </h1>
             </div>
           </div>

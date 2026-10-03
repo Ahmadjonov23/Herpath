@@ -1,6 +1,6 @@
 {
-  "name": "HerPath",
-  "description": "Xavfsiz ish. Erkin yo‘l. Kuchli kelajak. O‘zbekiston talaba qizlari va yosh ayollar uchun ishonchli ish o‘rinlari va xavfsiz harakatlanish platformasi.",
+  "name": "Soatbay",
+  "description": "Soatbay — Talabalar va yoshlar uchun qulay soatbay ishlar, moslashuvchan grafikdagi e'lonlar va xavfsiz ish platformasi.",
   "requestFramePermissions": ["geolocation"],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
